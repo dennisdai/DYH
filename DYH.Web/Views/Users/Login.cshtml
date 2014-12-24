@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/theme/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/login.css">
+    <script type="text/javascript" src="~/Content/theme/scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Content/theme/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Content/theme/scripts/login.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <section id="content">
+            <div class="signin-block">
+               
+                <div class="sigin-body">
+                    <div class="container">
+                        <div class="form-container">
+
+                            <header>
+                                User Manager
+                            </header>
+
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="User Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-lock"></span>
+                                            </span>
+                                            <input type="password" class="form-control" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="javascript:;" class="forgot">Forgot your password?</a>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <a href="#/" class="btn btn-primary btn-lg btn-block">Log in</a>
+                                    </div>
+                                </fieldset>
+                            </form>
+
+                            <section>
+                                <p class="text-center text-muted text-small">Don't have an account yet? <a href="#/pages/signup">Sign up</a></p>
+                            </section>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
