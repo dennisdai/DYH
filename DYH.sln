@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DYH.Models", "DYH.Models\DY
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DYH.Data", "DYH.Data\DYH.Data.csproj", "{432CC3F3-8CE2-459F-AFA0-A2395ADB70E8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{A6C583E3-5683-4BE6-958F-2EB5A1C943F6}"
-	ProjectSection(SolutionItems) = preProject
-		libs\Npgsql.dll = libs\Npgsql.dll
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DYH.DAL", "DYH.DAL\DYH.DAL.csproj", "{62412886-3107-47B4-BADE-CE78DDB091BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DYH.IDAL", "DYH.IDAL\DYH.IDAL.csproj", "{C1792E7E-54CE-4C5A-B309-1CB02A8A01BD}"

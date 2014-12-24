@@ -1,0 +1,156 @@
+/*==============================================================*/
+/* DBMS name:      PostgreSQL 9.x                               */
+/* Created on:     2014/12/23 20:06:51                          */
+/*==============================================================*/
+
+
+drop table ActionModules;
+
+drop table Actions;
+
+drop table Modules;
+
+drop index IDX_RoleId_RoleCode;
+
+drop table Roles;
+
+drop table UserRoles;
+
+drop index IDX_UserID_UserName_Email;
+
+drop table Users;
+
+/*==============================================================*/
+/* Table: ActionModules                                         */
+/*==============================================================*/
+create table ActionModules (
+   ActionModuleId       SERIAL not null,
+   ActionId             INT4                 null,
+   ModuleId             INT4                 null,
+   Status               BOOL                 null,
+   constraint PK_ACTIONMODULES primary key (ActionModuleId)
+);
+
+/*==============================================================*/
+/* Table: Actions                                               */
+/*==============================================================*/
+create table Actions (
+   ActionId             SERIAL not null,
+   ActionCode           VARCHAR(50)          null,
+   DisplayName          VARCHAR(50)          null,
+   SeqNo                INT4                 null,
+   Description          VARCHAR(500)         null,
+   CreatedBy            VARCHAR(50)          null,
+   CreatedTime          DATE                 null,
+   ChangedBy            VARCHAR(50)          null,
+   ChangedTime          DATE                 null,
+   constraint PK_Actions_ActionId primary key (ActionId),
+   constraint UNQ_Actions_ActionCode unique (ActionCode)
+);
+
+/*==============================================================*/
+/* Table: Modules                                               */
+/*==============================================================*/
+create table Modules (
+   ModuleId             SERIAL not null,
+   ParentId             INT4                 null,
+   ModuleCode           VARCHAR(50)          null,
+   DisplayName          VARCHAR(50)          null,
+   DisplayAsMenu        BOOL                 null,
+   ClassName            VARCHAR(20)          null,
+   URL                  VARCHAR(100)         null,
+   SeqNo                INT4                 null,
+   Description          VARCHAR(500)         null,
+   CreatedBy            VARCHAR(50)          null,
+   CreatedTime          DATE                 null,
+   ChangedBy            VARCHAR(50)          null,
+   ChangedTime          DATE                 null,
+   constraint PK_Modules_ModuleId primary key (ModuleId),
+   constraint UNQ_Modules_ModuleCode unique (ModuleCode)
+);
+
+/*==============================================================*/
+/* Table: Roles                                                 */
+/*==============================================================*/
+create table Roles (
+   RoleId               SERIAL not null,
+   RoleCode             VARCHAR(50)          not null,
+   DisplayName          VARCHAR(50)          null,
+   SeqNo                INT4                 null,
+   Description          VARCHAR(500)         null,
+   CreatedBy            VARCHAR(50)          null,
+   CreatedTime          DATE                 null,
+   ChangedBy            VARCHAR(50)          null,
+   ChangedTime          DATE                 null,
+   constraint PK_Roles_RoleId primary key (RoleId),
+   constraint UNQ_Roles_RoleCode unique (RoleCode)
+);
+
+/*==============================================================*/
+/* Index: IDX_RoleId_RoleCode                                   */
+/*==============================================================*/
+create unique index IDX_RoleId_RoleCode on Roles (
+( RoleId ),
+( RoleCode )
+);
+
+/*==============================================================*/
+/* Table: UserRoles                                             */
+/*==============================================================*/
+create table UserRoles (
+   UserRoleId           SERIAL not null,
+   UserId               INT4                 null,
+   RoleId               INT4                 null,
+   Status               BOOL                 null,
+   constraint PK_UserRoles_UserRoleId primary key (UserRoleId)
+);
+
+/*==============================================================*/
+/* Table: Users                                                 */
+/*==============================================================*/
+create table Users (
+   UserId               SERIAL not null,
+   UserName             VARCHAR(50)          null,
+   Password             VARCHAR(50)          null,
+   Email                VARCHAR(100)         null,
+   FirstName            VARCHAR(50)          null,
+   LastName             VARCHAR(50)          null,
+   Language             VARCHAR(50)          null,
+   CreatedBy            VARCHAR(50)          null,
+   CreatedTime          DATE                 null,
+   ChangedBy            VARCHAR(50)          null,
+   ChangedTime          VARCHAR(50)          null,
+   constraint PK_Users_UserId primary key (UserId),
+   constraint UNQ_Users_UserName unique (UserName),
+   constraint UNQ_Users_Email unique (Email)
+);
+
+/*==============================================================*/
+/* Index: IDX_UserID_UserName_Email                             */
+/*==============================================================*/
+create unique index IDX_UserID_UserName_Email on Users (
+( UserId ),
+( UserName ),
+( Email )
+);
+
+alter table ActionModules
+   add constraint FK_ActionModuels_RF_Actions foreign key (ActionId)
+      references Actions (ActionId)
+      on delete restrict on update restrict;
+
+alter table ActionModules
+   add constraint FK_ActionModules_RF_Modules foreign key (ModuleId)
+      references Modules (ModuleId)
+      on delete restrict on update restrict;
+
+alter table UserRoles
+   add constraint FK_UserRoles_RF_Roles foreign key (RoleId)
+      references Roles (RoleId)
+      on delete restrict on update restrict;
+
+alter table UserRoles
+   add constraint FK_UserRoles_RF_Users foreign key (UserId)
+      references Users (UserId)
+      on delete restrict on update restrict;
+
