@@ -21,19 +21,19 @@ namespace DYH.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            //GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            var builder = new ContainerBuilder();
-            builder.RegisterType<DbConn>();
-            builder.RegisterType<UserData>().As<IUser>();
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
+            //var builder = new ContainerBuilder();
+            //builder.RegisterType<DbConn>();
+            //builder.RegisterType<UserData>().As<IUser>();
+            //builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
-            var container = builder.Build();
+            //var container = builder.Build();
 
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }

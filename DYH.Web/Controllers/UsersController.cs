@@ -10,15 +10,15 @@ namespace DYH.Web.Controllers
     public class UsersController : Controller
     {
         private IUser _user;
-        public UsersController(IUser user)
-        {
-            _user = user;
-        }
+        //public UsersController(IUser user)
+        //{
+        //    _user = user;
+        //}
 
         public ActionResult Login()
         {
-            var list = _user.GetList();
-            var lst = list.ToList();
+            //var list = _user.GetList();
+            //var lst = list.ToList();
 
             return View();
         }
