@@ -1,16 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title>@ViewBag.Title</title>
 
     <link rel="stylesheet" type="text/css" href="~/Content/theme/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/theme/plugins/powertip/css/jquery.powertip.css">
     <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/bootcss.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/media.css">
     <script type="text/javascript" src="~/Content/theme/scripts/jquery.js"></script>
     <script type="text/javascript" src="~/Content/theme/scripts/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/Content/theme/plugins/powertip/jquery.powertip.js"></script>
     <script type="text/javascript" src="~/Content/theme/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="~/Content/theme/scripts/main.js"></script>
 
@@ -120,7 +124,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-user"></i>
                             <span class="user-info">
-                                <small>Welcome,</small>Carl Dai 22233
+                                <small>Welcome,</small>@Utility.CurrentLoginModel.UserName
                             </span>
                             <i class="icon-caret-down"></i>
                         </a>
@@ -142,7 +146,7 @@
                             <li class="divider"></li>
 
                             <li>
-                                <a href="#">
+                                <a href="~/Users/Logout">
                                     <i class="icon-power-off"></i>
                                     <span>Logout</span>
                                 </a>
@@ -209,8 +213,16 @@
                                 <i class="icon-th-large">
                                     <span class="icon-bg bg-orange"></span>
                                 </i>
-                                <span data-i18n="Dashboard">Dashboard</span>
+                                <span>Setup</span>
                             </a>
+                            <ul class="carte-children">
+                                <li>
+                                    <a href="~/Users/Index">
+                                        <span class="title">Users</span>
+                                    </a>
+                                </li>
+                            </ul>
+
                         </li>
                         <li>
                             <a href="#">
@@ -264,34 +276,8 @@
                 </nav>
             </aside>
             <section id="main-container">
-                
-                <div class="breadcrumbs" id="breadcrumbs">
-                    <ul class="breadcrumb">
-                        <li>
-                            <i class="ace-icon icon-home home-icon"></i>
-                            <a href="#">Home</a>
-                        </li>
 
-                        <li>
-                            <a href="#">Tables</a>
-                        </li>
-                        <li class="active">Simple &amp; Dynamic</li>
-                    </ul><!-- /.breadcrumb -->
-                    <!-- #section:basics/content.searchbox -->
-                    <div class="nav-search" id="nav-search">
-                        <form class="form-search">
-                            <span class="input-icon">
-                                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off">
-                                <i class="ace-icon icon-search nav-search-icon"></i>
-                            </span>
-                        </form>
-                    </div><!-- /.nav-search -->
-                    <!-- /section:basics/content.searchbox -->
-                </div>
-
-                <section id="container">
-                    @RenderBody()
-                </section>
+                @RenderBody()
 
             </section>
 
@@ -301,7 +287,7 @@
         </footer>
     </div>
     @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)*@
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
 </body>
 </html>

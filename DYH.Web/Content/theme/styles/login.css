@@ -7,6 +7,11 @@ body{
 	background-color:#282828;
 	background-size:16px 16px;
 }
+ul, li, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none outside none;
+}
 .wrapper a{
 	text-decoration: none;
 }
@@ -196,3 +201,71 @@ a.btn-sm>i{
 	line-height: 35px;
 	display: block;
 }
+.field-validation-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border: 1px solid #eed3d7;
+    line-height: 20px;
+    border-radius: 2px;
+    padding: 5px 8px;
+    display: block;
+    margin-top: 5px;
+    font-size: 1em;
+}
+/* custom validation-summary-errors css */
+.message-box {
+    position: absolute;
+    width: 50%;
+    text-align: center;
+    left: 25%;
+    top: 2px;
+    z-index: 99;
+    display: none;
+}
+
+/* tip box */
+.warning, .success, .info, .error {
+    line-height: 20px;
+    border-radius: 2px;
+    padding: 5px 8px;
+}
+
+.validation-summary-errors {
+    line-height: 20px;
+    border-radius: 2px;
+    padding: 5px 8px;
+    color: #b94a48;
+    background-color: #f2dede;
+    border: 1px solid #eed3d7;
+}
+
+.validation-summary-errors.summary {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+}
+
+.warning {
+    color: #c09853;
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+}
+
+.success {
+    color: #468847;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+}
+
+.info {
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+}
+
+.error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border: 1px solid #eed3d7;
+}
+

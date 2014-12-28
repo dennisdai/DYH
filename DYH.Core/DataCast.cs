@@ -92,5 +92,18 @@ namespace DYH.Core
                 return Get<T>(value);
             }
         }
+
+        public static bool IsNull(object value)
+        {
+            if (object.Equals(null, value))
+            {
+                return true;
+            }
+            if (Convert.IsDBNull(value))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

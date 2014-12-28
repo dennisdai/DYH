@@ -27,8 +27,8 @@ namespace DYH.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var builder = new ContainerBuilder();
-            builder.RegisterType<DbConn>();
-            builder.RegisterType<UserData>().As<IUser>();
+            builder.RegisterType<DataProvider>().InstancePerRequest();
+            builder.RegisterType<UserRepository>().As<IUser>().InstancePerRequest(); 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             var container = builder.Build();

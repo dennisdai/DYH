@@ -1,4 +1,6 @@
-﻿@{
+﻿@using DYH.Core
+@model LoginViewModel
+@{
     Layout = null;
 }
 
@@ -12,8 +14,11 @@
     <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="~/Content/theme/styles/login.css">
     <script type="text/javascript" src="~/Content/theme/scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Content/theme/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/Content/theme/scripts/jquery.validate.unobtrusive.js"></script>
     <script type="text/javascript" src="~/Content/theme/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="~/Content/theme/scripts/login.js"></script>
+    <meta name="description" content="login" />
 </head>
 <body>
     <div class="wrapper">
@@ -28,40 +33,45 @@
                                 User Manager
                             </header>
 
-                            <form class="form-horizontal">
+                            <form action="~/Users/Login" method="post" class="form-horizontal">
+                                @Html.HiddenFor(x => x.ReturnUrl)
                                 <fieldset>
                                     <div class="form-group">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-user"></span>
                                             </span>
-                                            <input type="text" class="form-control" placeholder="User Name">
+                                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "User Name" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(x => x.UserName)
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom:0;">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-lock"></span>
                                             </span>
-                                            <input type="password" class="form-control" placeholder="Password">
+                                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" })
                                         </div>
+                                        @Html.ValidationMessageFor(x => x.Password)
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-6">
+                                        <div class="input-group input-group-lg">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> Remember me
+                                                    <input type="checkbox" name="Remember" @(Model.Remember == "on" ? "checked" : "")>Remember me 7 days
+                                                </label>
+                                                <label>
+                                                    <a href="javascript:;" class="forgot">Forgot your password?</a>
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <a href="javascript:;" class="forgot">Forgot your password?</a>
-
-                                        </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <a href="#/" class="btn btn-primary btn-lg btn-block">Log in</a>
+                                        <input type="hidden" name="TimezoneOffset" id="TimezoneOffset" />
+                                        <button type="submit" name="btnLogin" class="btn btn-primary btn-lg btn-block">Log in</button>
+
                                     </div>
                                 </fieldset>
                             </form>
@@ -76,5 +86,14 @@
             </div>
         </section>
     </div>
+
+    @if (DataCast.Get<bool>(ViewBag.HasMessage))
+    {
+        <div class="message-box">
+            <div class="success @TempData["MessageType"]">
+                @Html.ValidationSummary("", new { @class = "summary" })
+            </div>
+        </div>
+    }
 </body>
 </html>

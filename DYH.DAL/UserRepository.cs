@@ -10,42 +10,44 @@ using DYH.Models;
 
 namespace DYH.DAL
 {
-    public class UserData : IUser
+    public class UserRepository : IUser
     {
-        private readonly DbConn _conn;
-        public UserData(DbConn conn)
+        private readonly DataProvider _provider;
+        public UserRepository(DataProvider provider)
         {
-            _conn = conn;
+            _provider = provider;
         }
 
         public UserEntry GetUser(int userId)
         {
-            return _conn.Database.FirstOrDefault<UserEntry>("WHERE userid = @0", userId);
+            return _provider.Database.FirstOrDefault<UserEntry>("WHERE userid = @0", userId);
         }
 
         public UserEntry GetUser(string userName)
         {
-            return _conn.Database.FirstOrDefault<UserEntry>("WHERE username = @0", userName);
+            return _provider.Database.FirstOrDefault<UserEntry>("WHERE username = @0", userName);
         }
 
         public int Add(UserEntry entry)
         {
-            return DataCast.Get<int>(_conn.Database.Insert(entry));
+            return DataCast.Get<int>(_provider.Database.Insert(entry));
         }
 
         public int Update(UserEntry entry)
         {
-            return _conn.Database.Update(entry);
+            return _provider.Database.Update(entry);
         }
 
         public int Delete(UserEntry entry)
         {
-            return _conn.Database.Delete(entry);
+            return _provider.Database.Delete(entry);
         }
 
         public IEnumerable<UserEntry> GetList()
         {
-            return _conn.Database.Query<UserEntry>("WHERE 1=1");
+            return _provider.Database.Query<UserEntry>("WHERE 1=1");
         }
     }
+
+    
 }

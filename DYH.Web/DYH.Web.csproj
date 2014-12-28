@@ -156,13 +156,37 @@
     <Content Include="Content\theme\jqui\jquery-ui-1.11.2.custom\jquery-ui.structure.min.css" />
     <Content Include="Content\theme\jqui\jquery-ui-1.11.2.custom\jquery-ui.theme.css" />
     <Content Include="Content\theme\jqui\jquery-ui-1.11.2.custom\jquery-ui.theme.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-blue.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-blue.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-dark.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-dark.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-green.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-green.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-light.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-light.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-orange.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-orange.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-purple.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-purple.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-red.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-red.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-yellow.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip-yellow.min.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip.css" />
+    <Content Include="Content\theme\plugins\powertip\css\jquery.powertip.min.css" />
+    <Content Include="Content\theme\plugins\powertip\jquery.powertip.js" />
+    <Content Include="Content\theme\plugins\powertip\jquery.powertip.min.js" />
     <Content Include="Content\theme\scripts\jquery.js" />
     <Content Include="Content\theme\scripts\jquery.slimscroll.js" />
+    <Content Include="Content\theme\scripts\jquery.validate.js" />
+    <Content Include="Content\theme\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\theme\scripts\login.js" />
     <Content Include="Content\theme\scripts\main.js" />
     <Content Include="Content\theme\styles\font-awesome.css" />
     <Content Include="Content\theme\styles\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\theme\styles\login.css" />
+    <Content Include="Content\theme\styles\bootcss.css" />
+    <Content Include="Content\theme\styles\media.css" />
     <Content Include="Content\theme\styles\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -211,6 +235,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -236,6 +262,10 @@
     <ProjectReference Include="..\DYH.Models\DYH.Models.csproj">
       <Project>{fabd6447-654b-483a-9a6e-6ad2f415f1f5}</Project>
       <Name>DYH.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DYH.Web.Framework\DYH.Web.Framework.csproj">
+      <Project>{7574328f-d734-4462-90b5-fbd9cafa7af7}</Project>
+      <Name>DYH.Web.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

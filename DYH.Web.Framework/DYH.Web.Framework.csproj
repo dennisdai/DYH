@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FABD6447-654B-483A-9A6E-6AD2F415F1F5}</ProjectGuid>
+    <ProjectGuid>{7574328F-D734-4462-90B5-FBD9CAFA7AF7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DYH.Models</RootNamespace>
-    <AssemblyName>DYH.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>DYH.Web.Framework</RootNamespace>
+    <AssemblyName>DYH.Web.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,16 +48,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseController.cs" />
+    <Compile Include="UserModelPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserEntry.cs" />
-    <Compile Include="ViewModel\LoginModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="Utils\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DYH.Data\DYH.Data.csproj">
-      <Project>{432cc3f3-8ce2-459f-afa0-a2395adb70e8}</Project>
-      <Name>DYH.Data</Name>
+    <ProjectReference Include="..\DYH.Core\DYH.Core.csproj">
+      <Project>{6f6bc7a9-315f-4710-8960-2890fb92c807}</Project>
+      <Name>DYH.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DYH.DAL\DYH.DAL.csproj">
+      <Project>{62412886-3107-47b4-bade-ce78ddb091bc}</Project>
+      <Name>DYH.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DYH.IDAL\DYH.IDAL.csproj">
+      <Project>{c1792e7e-54ce-4c5a-b309-1cb02a8a01bd}</Project>
+      <Name>DYH.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DYH.Models\DYH.Models.csproj">
+      <Project>{fabd6447-654b-483a-9a6e-6ad2f415f1f5}</Project>
+      <Name>DYH.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
