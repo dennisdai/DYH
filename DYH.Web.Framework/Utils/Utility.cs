@@ -13,6 +13,11 @@ namespace DYH.Web.Framework.Utils
 {
     public class Utility
     {
+        public static int PageSize
+        {
+            get { return 10; }
+        }
+
         /// <summary>
         /// get model state if there is some validation errors.
         /// </summary>
