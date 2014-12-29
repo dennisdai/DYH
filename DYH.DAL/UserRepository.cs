@@ -43,9 +43,11 @@ namespace DYH.DAL
             return _provider.Database.Delete(entry);
         }
 
-        public IEnumerable<UserEntry> GetList()
+        public List<UserEntry> GetList(string condition, int pageSize, int pageIndex, out int records, params object[] args)
         {
-            return _provider.Database.Query<UserEntry>("WHERE 1=1");
+             var page = _provider.Database.Page<UserEntry>(pageIndex, pageSize, condition, args);
+            records = (int)page.TotalItems;
+            return page.Items;
         }
     }
 

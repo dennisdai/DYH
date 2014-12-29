@@ -9,7 +9,7 @@ namespace DYH.IDAL
 {
     public interface IUser
     {
-        IEnumerable<UserEntry> GetList();
+        List<UserEntry> GetList(string condition, int pageSize, int pageIndex, out int records, params object[] args);
         UserEntry GetUser(int userId);
         UserEntry GetUser(string userName);
         int Add(UserEntry entry);

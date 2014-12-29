@@ -1,4 +1,8 @@
 body{
+    font-size: .85em;
+    font-family: /*"Segoe UI"*/Arial, Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
 	background:
 	radial-gradient(black 15%, transparent 16%) 0 0,
 	radial-gradient(black 15%, transparent 16%) 8px 8px,
@@ -201,6 +205,7 @@ a.btn-sm>i{
 	line-height: 35px;
 	display: block;
 }
+
 .field-validation-error {
     color: #b94a48;
     background-color: #f2dede;

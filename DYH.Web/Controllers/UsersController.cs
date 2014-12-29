@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DYH.Core;
 using DYH.IDAL;
+using DYH.Models;
 using DYH.Models.ViewModel;
 using DYH.Web.Framework.Utils;
 
@@ -165,7 +166,20 @@ namespace DYH.Web.Controllers
         }
 
 
-        public ActionResult Index()
+        public ActionResult Index(int id = 1)
+        {
+            int records = 0;
+            var list = _user.GetList("WHERE 1=1", Utility.PageSize, id, out records);
+            return View(list);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(UserEntry model)
         {
             return View();
         }

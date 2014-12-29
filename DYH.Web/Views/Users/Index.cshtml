@@ -1,5 +1,8 @@
-﻿@{
+﻿@model List<UserEntry>
+@{
+
     ViewBag.Title = "Dashboard";
+    
 }
 
 <div class="breadcrumbs" id="breadcrumbs">
@@ -14,9 +17,9 @@
 
 <section id="container">
     <div class="all-margin">
-        <div class="row cust-row clear-lr-margin">
+        <div class="cust-row clear-lr-margin">
             <div class="btn-group">
-                <a href="#" class="btn btn-default btn-bgcolor powertip" title="Add"><i class="icon-plus"></i></a>
+                <a href="~/Users/Create" class="btn btn-default btn-bgcolor powertip" title="Add"><i class="icon-plus"></i></a>
                 <a href="#" class="btn btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
                 <a href="#" class="btn btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
             </div>
@@ -30,67 +33,37 @@
                             <th class="center">
                                 <input type="checkbox" />
                             </th>
-                            <th>Domain</th>
-                            <th>Price</th>
-                            <th class="hidden-480">Clicks</th>
-
-                            <th>
-                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-                                Update
-                            </th>
-                            <th class="hidden-480">Status</th>
-
+                            <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Created By</th>
+                            <th>Created Time</th>
                             <th class="btn-item2"></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr class="">
-                            <td class="center">
-                                <input type="checkbox" />
-                            </td>
-
-                            <td>
-                                <a href="#">ace.com</a>
-                            </td>
-                            <td>$45</td>
-                            <td class="hidden-480">3,330</td>
-                            <td>Feb 12</td>
-
-                            <td class="hidden-480">
-                                <span class="label label-sm label-warning">Expiring</span>
-                            </td>
-
-                            <td>
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-info btn-sm"><i class="icon-pencil"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="icon-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td class="center">
-                                <input type="checkbox" />
-                            </td>
-
-                            <td>
-                                <a href="#">ace.com</a>
-                            </td>
-                            <td>$45</td>
-                            <td class="hidden-480">3,330</td>
-                            <td>Feb 12</td>
-
-                            <td class="hidden-480">
-                                <span class="label label-sm label-warning">Expiring</span>
-                            </td>
-
-                            <td>
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-info btn-sm"><i class="icon-pencil"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="icon-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="center">
+                                    <input type="checkbox" value="@item.UserId" />
+                                </td>
+                                <td>@item.UserName</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Email</td>
+                                <td>@item.CreatedBy</td>
+                                <td>@item.CreatedTime</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-info btn-sm"><i class="icon-pencil"></i></a>
+                                        <a href="#" class="btn btn-danger btn-sm"><i class="icon-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
                 <!-- end table -->
