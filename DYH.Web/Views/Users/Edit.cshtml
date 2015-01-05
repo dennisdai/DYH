@@ -1,0 +1,74 @@
+﻿@model UserEntry
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <div class="breadcrumb">
+        <a href="#">Setup</a>
+        <a href="~/Users/Index">User List</a>
+        <a href="#" class="active">Edit User</a>
+    </div>
+</div>
+
+<section id="container">
+    <div class="all-margin">
+        <form action="~/Users/Edit" method="post" class="form-horizontal" role="form">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.UserId)
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.UserName, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", disabled = "disabled" })
+                    @Html.ValidationMessageFor(x => x.UserName)
+                </div>
+
+                @Html.LabelFor(x => x.Email, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    <input class="form-control" data-val="true" value="@Model.Email" data-val-regex="@string.Format("Please enter a valid {0}.", "Email")" data-val-regex-pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" data-val-required="@string.Format("The {0} field is required.","Email")" id="Email" name="Email" type="text">
+                    <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group form-group-sm" style="margin-left:-10px; margin-right:-10px;">
+               
+                <div class="col-sm-offset-2 col-sm-10 info">
+                    If you would like to change the password, please type a new one. Otherwise leave this blank.
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.Password, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    <input class="form-control" data-val="true" data-val-length="@string.Format("Please enter {0} between {1} and {2} characters long.", "Password", 6, 20)" data-val-length-max="20" data-val-length-min="6" id="Password" name="Password" type="password">
+                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                </div>
+
+                @Html.LabelFor(x => x.NonPassword, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    <input class="form-control" data-val="true" data-val-equalto="@string.Format("{0} and {1} do not match.", "Password","Re Password")" data-val-equalto-other="*.Password" id="NonPassword" name="NonPassword" type="password">
+                    <span class="field-validation-valid" data-valmsg-for="NonPassword" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.FirstName, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.FirstName)
+                </div>
+
+                @Html.LabelFor(x => x.LastName, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.LastName)
+                </div>
+            </div>
+            <div class="form-group"></div>
+            <div class="form-group text-center">
+                <a href="~/Users/Index/" class="btn btn-info btn-sm">Cancel</a>
+                <span class="btn-space"></span>
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            </div>
+        </form>
+    </div>
+</section>

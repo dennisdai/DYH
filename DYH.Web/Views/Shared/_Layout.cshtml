@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using DYH.Core
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -8,16 +9,27 @@
 
     <link rel="stylesheet" type="text/css" href="~/Content/themes/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/themes/styles/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/plugins/ui/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/plugins/fancybox/jquery.fancybox.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/themes/plugins/powertip/css/jquery.powertip.css">
     <link rel="stylesheet" type="text/css" href="~/Content/themes/styles/style.css">
     <link rel="stylesheet" type="text/css" href="~/Content/themes/styles/bootcss.css">
     <link rel="stylesheet" type="text/css" href="~/Content/themes/styles/media.css">
+    
+    @if (Context.Request.Browser.Browser.ToLower().Contains("internetexplorer"))
+    {
+        <link href="@Url.Content("~/Content/themes/styles/ie.css")" rel="stylesheet" type="text/css" />
+    }
+
     <script type="text/javascript" src="~/Content/themes/scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Content/themes/scripts/jquery.bganimate.js"></script>
+    <script type="text/javascript" src="~/Content/themes/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Content/themes/plugins/ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Content/themes/plugins/fancybox/jquery.fancybox.js"></script>
     <script type="text/javascript" src="~/Content/themes/scripts/jquery.slimscroll.js"></script>
     <script type="text/javascript" src="~/Content/themes/plugins/powertip/jquery.powertip.js"></script>
     <script type="text/javascript" src="~/Content/themes/scripts/jquery.validate.js"></script>
     <script type="text/javascript" src="~/Content/themes/scripts/jquery.validate.unobtrusive.js"></script>
-    <script type="text/javascript" src="~/Content/themes/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="~/Content/themes/scripts/main.js"></script>
 
     @*@Styles.Render("~/Content/css")
@@ -28,6 +40,7 @@
     <div class="wrapper">
         <header class="header">
             <div class="logo navbar-header pull-left">
+                <a href="#" class="switcher"><i class="icon-th-list"></i></a>
                 <a href="#"><i class="icon-users"></i><span>User Manager</span></a>
             </div>
             <div class="navbr-buttons navbar-header pull-right">
@@ -158,7 +171,7 @@
                 </ul>
             </div>
         </header>
-        <div class="content">
+        <div class="primary-content">
             <aside class="nav-aside">
                 <nav class="nav-wrapper">
                     <ul class="carte">
@@ -223,6 +236,16 @@
                                         <span class="title">Users</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="~/Actions/Index">
+                                        <span class="title">Actions</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/Modules/Index">
+                                        <span class="title">Modules</span>
+                                    </a>
+                                </li>
                             </ul>
 
                         </li>
@@ -282,12 +305,44 @@
                 @RenderBody()
 
             </section>
-
+            <footer class="footer">
+                <p>© Copyright, DYH Inc. 2014. All rights reserved</p>
+            </footer>
         </div>
-        <footer class="footer">
-            这是我的应用程序
-        </footer>
+        
     </div>
+
+    @if (DataCast.Get<bool>(ViewBag.HasMessage))
+    {
+        <div class="message-box">
+            <div class="success @TempData["MessageType"]">
+                @Html.ValidationSummary("", new { @class = "summary" })
+            </div>
+        </div>
+    }
+    
+    <div id="dlgload" title="Loading" style="display:none;">
+        <div class="ui-dialog-loading">
+            <p style="font-size:40px;">
+                <i class="icon-spinner icon-spin"></i>
+            </p>
+            <p style="margin-top:10px;">
+                <strong>Loading...</strong>
+            </p>
+        </div>
+    </div>
+
+    <div id="dlgmsg" title="Information" style="display:none;">
+        <div class="ul-table" style="margin:15px 0 10px 0;">
+            <ul class="ul-table-row">
+                <li style="border:none;width:20%;padding-left:20px;"><i class="icon-info-circle" style="font-size: 30px;"></i></li>
+                <li style="border:none;width:80%;padding:0 10px 0 10px;">
+                    <p id="dlgmsg-text"> </p>
+                </li>
+            </ul>
+        </div>        
+    </div>
+    
     @*@Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)*@

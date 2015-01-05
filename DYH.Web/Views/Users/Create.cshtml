@@ -1,23 +1,20 @@
 ﻿@model UserEntry
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "New User";
 }
 
 <div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <i class="ace-icon icon-home home-icon"></i>
-            <a href="#">Setup</a>
-        </li>
-        <li><a href="~/Users/Index">User List</a></li>
-        <li class="active">New User</li>
-    </ul>
+    <div class="breadcrumb">
+        <a href="#">Setup</a>
+        <a href="~/Users/Index">User List</a>
+        <a href="#" class="active">New User</a>
+    </div>
 </div>
 
 <section id="container">
     <div class="all-margin">
         <form action="~/Users/Create" method="post" class="form-horizontal" role="form">
-
+            @Html.AntiForgeryToken()
             <div class="form-group form-group-sm">
                 @Html.LabelFor(x => x.UserName, new { @class = "col-sm-2 control-label" })
                 <div class="col-sm-4">
@@ -39,18 +36,18 @@
                     @Html.ValidationMessageFor(x => x.Password)
                 </div>
 
-                @Html.LabelFor(x => x.FirstName, new { @class = "col-sm-2 control-label" })
-                <div class="col-sm-4">
-                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.FirstName)
-                </div>
-            </div>
-
-            <div class="form-group form-group-sm">
                 @Html.LabelFor(x => x.NonPassword, new { @class = "col-sm-2 control-label" })
                 <div class="col-sm-4">
                     @Html.PasswordFor(x => x.NonPassword, new { @class = "form-control" })
                     @Html.ValidationMessageFor(x => x.NonPassword)
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.FirstName, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.FirstName)
                 </div>
 
                 @Html.LabelFor(x => x.LastName, new { @class = "col-sm-2 control-label" })

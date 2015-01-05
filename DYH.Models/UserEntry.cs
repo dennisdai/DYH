@@ -19,6 +19,7 @@ namespace DYH.Models
 
         [Required]
         [DisplayName("User Name")]
+        [Remote("CheckUserName", "Users", ErrorMessage = "User name has been used, please change one.")]
         [Column("username")]
         public string UserName { get; set; }
 
@@ -30,6 +31,7 @@ namespace DYH.Models
 
         [Required]
         [DisplayName("Email")]
+        [Remote("CheckEmail", "Users", ErrorMessage = "Email has been used, please change one.")]
         [Column("email")]
         public string Email { get; set; }
 
@@ -42,8 +44,7 @@ namespace DYH.Models
         [DisplayName("Last Name")]
         [Column("lastname")]
         public string LastName { get; set; }
-
-        [Required]
+        
         [DisplayName("language")]
         [Column("language")]
         public string Language { get; set; }
@@ -52,13 +53,13 @@ namespace DYH.Models
         public string CreatedBy { get; set; }
         
         [Column("createdtime")]
-        public string CreatedTime { get; set; }
+        public DateTime? CreatedTime { get; set; }
         
         [Column("changedby")]
         public string ChangedBy { get; set; }
         
         [Column("changedtime")]
-        public string ChangedTime { get; set; }
+        public DateTime? ChangedTime { get; set; }
 
         [DisplayName("Re-Password")]
         [StringLength(20, MinimumLength = 6)]

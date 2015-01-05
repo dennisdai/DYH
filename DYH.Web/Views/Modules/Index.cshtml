@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ModuleEntry>
+
+@{
+    ViewBag.Title = "Modules";
+}
+
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <div class="breadcrumb">
+        <a href="#">Setup</a>
+        <a href="~/Modules/Index" class="active">Modules</a>
+    </div>
+</div>
+
+<section id="container">
+    <div class="all-margin">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="position:relative;">
+                <h3 class="panel-title">Root</h3>
+                <div class="btn-group tool-bar">
+                    <a href="#" class="btn btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
+                </div>
+            </div>
+            <div class="dyh-tree">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="shrink">
+                                <i class="icon-plus-circle"></i>
+                            </span>
+                            <span class="title">
+                                Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard
+                            </span>
+                        </a>
+                        <div class="btn-group tool-bar">
+                            <a href="#" class="btn fancybox fancybox.ajax btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
+                            <a href="#" class="btn fancybox fancybox.ajax edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
+                            <a href="#" class="btn fancybox fancybox.ajax delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+                        </div>
+                        <ul class="dyh-sub-tree">
+                            <li>
+                                <a href="#">
+                                    <span class="shrink">
+                                        <i class="icon-minus-circle"></i>
+                                    </span>
+                                    <span class="title">
+                                        Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard
+                                    </span>
+                                </a>
+                                <div class="btn-group tool-bar">
+                                    <a href="#" class="btn fancybox fancybox.ajax btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
+                                    <a href="#" class="btn fancybox fancybox.ajax edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
+                                    <a href="#" class="btn fancybox fancybox.ajax delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+                                </div>
+                                <ul class="dyh-sub-tree">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">Setup</a></li>
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">Company</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Setup</a>
+                                <ul class="dyh-sub-tree">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">Setup</a></li>
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">Company</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">Company</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Setup</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Company</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

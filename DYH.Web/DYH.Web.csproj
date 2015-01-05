@@ -15,7 +15,7 @@
     <AssemblyName>DYH.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -145,7 +145,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActionsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -157,33 +159,29 @@
     <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\themes\bootstrap\js\bootstrap.js" />
     <Content Include="Content\themes\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\themes\images\blank.gif" />
+    <Content Include="Content\themes\images\fancybox_loading%402x.gif" />
+    <Content Include="Content\themes\images\fancybox_loading.gif" />
+    <Content Include="Content\themes\images\fancybox_overlay.png" />
+    <Content Include="Content\themes\images\fancybox_sprite%402x.png" />
+    <Content Include="Content\themes\images\fancybox_sprite.png" />
     <Content Include="Content\themes\images\line.dashed.png" />
     <Content Include="Content\themes\images\v.line.dashed.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\external\jquery\jquery.js" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_flat_55_fbec88_40x100.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_glass_75_d0e5f5_1x400.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_glass_85_dfeffc_1x400.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-icons_217bc0_256x240.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-icons_469bdd_256x240.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-icons_6da8d5_256x240.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-icons_d8e7f3_256x240.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\images\ui-icons_f9bd01_256x240.png" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\index.html" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.css" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.js" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.min.css" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.min.js" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.structure.css" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.structure.min.css" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.theme.css" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom\jquery-ui.theme.min.css" />
+    <Content Include="Content\themes\plugins\fancybox\blank.gif" />
+    <Content Include="Content\themes\plugins\fancybox\fancybox_loading%402x.gif" />
+    <Content Include="Content\themes\plugins\fancybox\fancybox_loading.gif" />
+    <Content Include="Content\themes\plugins\fancybox\fancybox_overlay.png" />
+    <Content Include="Content\themes\plugins\fancybox\fancybox_sprite%402x.png" />
+    <Content Include="Content\themes\plugins\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\themes\plugins\fancybox\helpers\fancybox_buttons.png" />
+    <Content Include="Content\themes\plugins\fancybox\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="Content\themes\plugins\fancybox\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Content\themes\plugins\fancybox\helpers\jquery.fancybox-media.js" />
+    <Content Include="Content\themes\plugins\fancybox\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="Content\themes\plugins\fancybox\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="Content\themes\plugins\fancybox\jquery.fancybox.css" />
+    <Content Include="Content\themes\plugins\fancybox\jquery.fancybox.js" />
+    <Content Include="Content\themes\plugins\fancybox\jquery.fancybox.pack.js" />
     <Content Include="Content\themes\plugins\powertip\css\jquery.powertip-blue.css" />
     <Content Include="Content\themes\plugins\powertip\css\jquery.powertip-blue.min.css" />
     <Content Include="Content\themes\plugins\powertip\css\jquery.powertip-dark.css" />
@@ -204,7 +202,26 @@
     <Content Include="Content\themes\plugins\powertip\css\jquery.powertip.min.css" />
     <Content Include="Content\themes\plugins\powertip\jquery.powertip.js" />
     <Content Include="Content\themes\plugins\powertip\jquery.powertip.min.js" />
+    <Content Include="Content\themes\plugins\ui\images\loading.gif" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\plugins\ui\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\plugins\ui\jquery-ui.min.css" />
+    <Content Include="Content\themes\plugins\ui\jquery-ui.min.js" />
+    <Content Include="Content\themes\scripts\jquery.bganimate.js" />
+    <Content Include="Content\themes\scripts\jquery.fancybox.js" />
     <Content Include="Content\themes\scripts\jquery.js" />
+    <Content Include="Content\themes\scripts\jquery.powertip.js" />
     <Content Include="Content\themes\scripts\jquery.slimscroll.js" />
     <Content Include="Content\themes\scripts\jquery.validate.js" />
     <Content Include="Content\themes\scripts\jquery.validate.unobtrusive.js" />
@@ -213,6 +230,9 @@
     <Content Include="Content\themes\styles\bootcss.css" />
     <Content Include="Content\themes\styles\font-awesome.css" />
     <Content Include="Content\themes\styles\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\themes\styles\ie.css" />
+    <Content Include="Content\themes\styles\jquery.fancybox.css" />
+    <Content Include="Content\themes\styles\jquery.powertip.css" />
     <Content Include="Content\themes\styles\login.css" />
     <Content Include="Content\themes\styles\media.css" />
     <Content Include="Content\themes\styles\style.css" />
@@ -221,12 +241,16 @@
     <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\themes\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\themes\jqui\jquery-ui-1.11.2.custom.zip" />
     <Content Include="Content\themes\styles\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\themes\styles\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\themes\styles\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\themes\styles\fonts\FontAwesome.otf" />
     <Content Include="Content\themes\styles\fonts\vssver2.scc" />
+    <Content Include="Content\themes\plugins\powertip\jquery.powertip.min.js.map">
+      <DependentUpon>jquery.powertip.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\themes\plugins\fancybox\helpers\vssver2.scc" />
+    <Content Include="Content\themes\plugins\fancybox\vssver2.scc" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -258,6 +282,11 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Actions\Index.cshtml" />
+    <Content Include="Views\Actions\Create.cshtml" />
+    <Content Include="Views\Actions\Edit.cshtml" />
+    <Content Include="Views\Modules\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -306,16 +335,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2939</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:9245/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

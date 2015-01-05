@@ -9,11 +9,15 @@ namespace DYH.IDAL
 {
     public interface IUser
     {
-        List<UserEntry> GetList(string condition, int pageSize, int pageIndex, out int records, params object[] args);
-        UserEntry GetUser(int userId);
-        UserEntry GetUser(string userName);
+        List<UserEntry> GetList(PageModel model);
+        UserEntry GetUserById(int userId);
+        UserEntry GetUserByName(string userName);
+        UserEntry GetUserByEmail(string email);
+
         int Add(UserEntry entry);
         int Update(UserEntry entry);
-        int Delete(UserEntry entry);
+        int Delete(int id);
+        int Delete(string ids);
+
     }
 }

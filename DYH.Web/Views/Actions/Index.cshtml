@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ActionEntry>
+
+@{
+    ViewBag.Title = "Action List";
+}
+
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <div class="breadcrumb">
+        <a href="#">Setup</a>
+        <a href="~/Actions/Index" class="active">Action List</a>
+    </div>
+</div>
+
+<section id="container">
+    <div class="all-margin">
+        <div class="cust-row clear-lr-margin">
+            <div class="btn-group">
+                <a href="~/Actions/Create/" class="btn fancybox fancybox.ajax btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
+                <a href="#" rel="~/Actions/Edit/" class="btn fancybox fancybox.ajax edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
+                <a href="#" rel="~/Actions/Delete/" class="btn fancybox fancybox.ajax delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+            </div>
+        </div>
+        <div class="row cust-row">
+            <div class="col-xs-12">
+                <!-- table -->
+                <table class="table celled table-striped  table-hover">
+                    <thead>
+                        <tr>
+                            <th class="center">
+                                <input type="checkbox" />
+                            </th>
+                            <th>Action Code</th>
+                            <th>Display Name</th>
+                            <th>Sequence</th>
+                            <th>Description</th>
+                            <th>Created By</th>
+                            <th>Created Time</th>
+                            <th class="btn-item2"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="center">
+                                    <input type="checkbox" value="@item.ActionId" />
+                                </td>
+                                <td>@item.ActionCode</td>
+                                <td>@item.DisplayName</td>
+                                <td>@item.SeqNo</td>
+                                <td>@item.Description</td>
+                                <td>@item.CreatedBy</td>
+                                <td>@TimeUtils.UtcToClient(item.CreatedTime)</td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="~/Actions/Edit/@item.ActionId" class="btn fancybox fancybox.ajax btn-info btn-sm"><i class="icon-pencil"></i></a>
+                                        <a href="~/Actions/Delete/@item.ActionId" class="btn btn-danger btn-sm"><i class="icon-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!-- end table -->
+            </div>
+        </div>
+    </div>
+</section>

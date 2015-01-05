@@ -1,27 +1,40 @@
 ﻿@model List<UserEntry>
 @{
+    ViewBag.Title = "User List";
+    string searchBy = ViewBag.SearchBy;
+    string searchContent = ViewBag.SearchContext;
 
-    ViewBag.Title = "Dashboard";
-    
+    string url = Url.Content("~/Users/Index?SearchBy=" + searchBy + "&SearchContent=" + searchContent + "&page=");
 }
 
 <div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <i class="ace-icon icon-home home-icon"></i>
-            <a href="#">Setup</a>
-        </li>
-        <li class="active">User List</li>
-    </ul>
+    <div class="breadcrumb">
+        <a href="#">Setup</a>
+        <a href="~/Users/Index" class="active">User List</a>
+    </div>
 </div>
 
 <section id="container">
     <div class="all-margin">
         <div class="cust-row clear-lr-margin">
             <div class="btn-group">
-                <a href="~/Users/Create" class="btn btn-default btn-bgcolor powertip" title="Add"><i class="icon-plus"></i></a>
-                <a href="#" class="btn btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
-                <a href="#" class="btn btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+                <a href="~/Users/Create/" class="btn btn-default btn-bgcolor powertip" title="Add"><i class="icon-plus"></i></a>
+                <a href="#" rel="~/Users/Edit/" class="btn edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
+                <a href="#" rel="~/Users/Delete/" class="btn delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+            </div>
+            
+            <div class="btns-group btns-right">
+                <form action="@Url.Content("~/Users/Index")" method="get" id="searchform">
+                    <select name="SearchBy" class="select-text first-element">
+                        <option value="">All Options</option>
+                        <option value="UserName" @(searchBy == "UserName" ? "selected" : "")>User Name</option>
+                        <option value="FirstName" @(searchBy == "FirstName" ? "selected" : "")>First Name</option>
+                        <option value="LastName" @(searchBy == "LastName" ? "selected" : "")>Last Name</option>
+                    </select>
+                    <input type="text" name="SearchContent" placeholder="Search..." class="tool-text">
+                    <a href="#" id="Search" class="btn btn-default btn-bgcolor powertip" title="Search"><i class="icon-search"></i></a>
+                </form>
+                
             </div>
         </div>
         <div class="row cust-row">
@@ -56,10 +69,10 @@
                                 <td>@item.Email</td>
                                 <td>@item.CreatedBy</td>
                                 <td>@item.CreatedTime</td>
-                                <td>
+                                <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-info btn-sm"><i class="icon-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger btn-sm"><i class="icon-trash"></i></a>
+                                        <a href="~/Users/Edit/@item.UserId" class="btn btn-info btn-sm"><i class="icon-pencil"></i></a>
+                                        <a href="~/Users/Delete/@item.UserId" class="btn btn-danger btn-sm"><i class="icon-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -67,8 +80,17 @@
                     </tbody>
                 </table>
                 <!-- end table -->
-
+                
+                @Html.Pager(ViewBag.PageModel as PageEntry, url)
+                
             </div>
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    $(function() {
+        $("#Search").on("click", function() {
+            $("form").submit();
+        });
+    });
+</script>

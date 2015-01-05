@@ -13,6 +13,10 @@
     <link rel="stylesheet" type="text/css" href="~/Content/themes/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/themes/styles/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="~/Content/themes/styles/login.css">
+    @if (Context.Request.Browser.Browser.ToLower().Contains("internetexplorer"))
+    {
+        <link href="@Url.Content("~/Content/themes/styles/ie.css")" rel="stylesheet" type="text/css" />
+    }
     <script type="text/javascript" src="~/Content/themes/scripts/jquery.js"></script>
     <script type="text/javascript" src="~/Content/themes/scripts/jquery.validate.js"></script>
     <script type="text/javascript" src="~/Content/themes/scripts/jquery.validate.unobtrusive.js"></script>

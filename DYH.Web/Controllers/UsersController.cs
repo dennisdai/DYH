@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -8,6 +10,7 @@ using DYH.Core;
 using DYH.IDAL;
 using DYH.Models;
 using DYH.Models.ViewModel;
+using DYH.Web.Framework;
 using DYH.Web.Framework.Utils;
 
 namespace DYH.Web.Controllers
@@ -45,7 +48,7 @@ namespace DYH.Web.Controllers
                 model.Remember = "on";
                 model.UserName = cookie["UserName"];
             }
-            
+
             if (Request.Cookies["LanguageKey"] == null)
             {
                 var langCookie = new HttpCookie("LanguageKey") { Value = langKey };
@@ -84,7 +87,7 @@ namespace DYH.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var info = _user.GetUser(model.UserName);
+                var info = _user.GetUserByName(model.UserName);
                 string pwd = Security.PwdMd5(model.Password);
                 if (info.Password == pwd)
                 {
@@ -126,6 +129,16 @@ namespace DYH.Web.Controllers
                             cookie.Expires = DateTime.Now.AddDays(7.0);
                             Response.Cookies.Add(cookie);
                         }
+                        else if (cookie["UserName"] != null)
+                        {
+                            if (model.UserName != (cookie["UserName"] as string))
+                            {
+                                Response.Cookies.Remove("DYH.COOKIES");
+                                cookie["UserName"] = model.UserName;
+                                cookie.Expires = DateTime.Now.AddDays(7.0);
+                                Response.Cookies.Add(cookie);
+                            }
+                        }
                     }
                     else
                     {
@@ -166,10 +179,36 @@ namespace DYH.Web.Controllers
         }
 
 
-        public ActionResult Index(int id = 1)
+        public ActionResult Index(int page = 1, string SearchBy = "", string SearchContent = "")
         {
-            int records = 0;
-            var list = _user.GetList("WHERE 1=1", Utility.PageSize, id, out records);
+            Utility.GetModelState(this);
+
+            ViewBag.SearchBy = SearchBy;
+            ViewBag.SearchContext = SearchContent;
+
+            var sbFilter = new StringBuilder();
+            if (SearchBy == "UserName")
+            {
+                sbFilter.AppendFormat("AND username LIKE '%{0}%'", SearchContent);
+            }
+            else if (SearchBy == "FirstName")
+            {
+                sbFilter.AppendFormat("AND firstname LIKE '%{0}%'", SearchContent);
+            }
+            else if (SearchBy == "LastName")
+            {
+                sbFilter.AppendFormat("AND lastname LIKE '%{0}%'", SearchContent);
+            }
+
+            var model = new PageModel
+                {
+                    Filter = "Where 1=1 " + sbFilter.ToString(),
+                    PageIndex = page,
+                    PageSize = Utility.PageSize
+                };
+
+            var list = _user.GetList(model);
+            Pagination.NewPager(this, page, (int)model.Records);
             return View(list);
         }
 
@@ -178,10 +217,177 @@ namespace DYH.Web.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(UserEntry model)
         {
-            return View();
+            if (_user.GetUserByName(model.UserName) != null)
+            {
+                ModelState.AddModelError("", string.Format("{0} has been used, please change one.", model.UserName));
+            }
+
+            if (_user.GetUserByEmail(model.Email) != null)
+            {
+                ModelState.AddModelError("", string.Format("{0} has been used, please change one.", model.Email));
+            }
+
+            if (ModelState.IsValid)
+            {
+                var info = Utility.CurrentLoginModel;
+                model.Password = Security.PwdMd5(model.Password);
+                model.CreatedBy = info.UserName;
+                model.CreatedTime = DateTime.Now;
+                if (Request.Cookies["LanguageKey"] != null)
+                    model.Language = Request.Cookies["LanguageKey"].ToString();
+
+                Utility.Operate(this, Operations.Add, () => _user.Add(model), model.UserName);
+            }
+            else
+            {
+                Utility.SetErrorModelState(this);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var info = _user.GetUserById(id);
+            return View(info);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(FormCollection collection)
+        {
+            var email = collection["Email"];
+            var info = _user.GetUserById(DataCast.Get<int>(collection["UserId"]));
+            var chkEmail = _user.GetUserByEmail(email);
+
+            if (!Validator.IsEmail(email))
+            {
+                ModelState.AddModelError(string.Empty, "Please enter a valid email.");
+            }
+
+            if (chkEmail != null && info.Email != email && !string.IsNullOrEmpty(chkEmail.Email))
+            {
+                ModelState.AddModelError(string.Empty, string.Format("{0} has been used, please change one.", email));
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(info.Email))
+                {
+                    info.Email = email;
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                var password = collection["Password"];
+                if (!string.IsNullOrEmpty(password))
+                {
+                    var md5Pwd = Security.PwdMd5(password);
+                    if (info.Password != null && info.Password != md5Pwd)
+                    {
+                        info.Password = md5Pwd;
+                    }
+                }
+
+                var first = collection["FirstName"];
+                var last = collection["LastName"];
+
+                if (!string.IsNullOrEmpty(first))
+                {
+                    info.FirstName = first;
+                }
+
+                if (!string.IsNullOrEmpty(last))
+                {
+                    info.LastName = last;
+                }
+
+                info.ChangedBy = Utility.CurrentUserName;
+                info.ChangedTime = DateTime.UtcNow;
+
+                Utility.Operate(this, Operations.Update, () => _user.Update(info), info.UserName);
+
+                //var roles = RoleService.GetList();
+                //var list = new List<UserRoleEntity>();
+                //foreach (var item in roles)
+                //{
+                //    var model = new UserRoleEntity();
+                //    var ChkName = "Role_" + item.RoleID;
+
+                //    var ChkVal = collection[ChkName];
+                //    var UserRole = "UserRole_" + item.RoleID;
+                //    var UserRoleID = DataCast.ToInt(collection[UserRole]);
+
+                //    if (ChkVal == "on")
+                //    {
+                //        model.RoleID = item.RoleID;
+                //        model.UserID = info.UserID;
+                //        model.UserRoleID = UserRoleID;
+                //    }
+                //    else
+                //    {
+                //        model.RoleID = 0;
+                //        model.UserID = 0;
+                //        model.UserRoleID = UserRoleID;
+                //    }
+
+                //    list.Add(model);
+                //}
+
+                //var dt = DataCast.ListToDataTable(list);
+
+                //Utils.Operate(this, OperateTypes.Update, () =>
+                //{
+                //    return UserService.Update(info, dt);
+                //}, info.UserName);
+            }
+            else
+            {
+                Utility.SetErrorModelState(this);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(string id)
+        {
+            var iVal = 0;
+            Utility.Operate(this, Operations.Delete, () =>
+            {
+                iVal = _user.Delete(id);
+                return iVal;
+            });
+
+            var page = Pagination.CheckPageIndexWhenDeleted(this, iVal);
+            return Redirect(string.Format("~/Users/Index?page={0}", page));
+        }
+
+        [Authorize]
+        public JsonResult CheckUserName(string userName)
+        {
+            var flag = true;
+            var info = _user.GetUserByName(userName);
+            if (info != null)
+            {
+                flag = false;
+            }
+
+            return Json(flag, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public JsonResult CheckEmail(string email)
+        {
+            var flag = true;
+            var info = _user.GetUserByEmail(email);
+            if (info != null)
+            {
+                flag = false;
+            }
+
+            return Json(flag, JsonRequestBehavior.AllowGet);
         }
     }
 }

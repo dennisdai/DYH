@@ -18,14 +18,19 @@ namespace DYH.DAL
             _provider = provider;
         }
 
-        public UserEntry GetUser(int userId)
+        public UserEntry GetUserById(int userId)
         {
             return _provider.Database.FirstOrDefault<UserEntry>("WHERE userid = @0", userId);
         }
 
-        public UserEntry GetUser(string userName)
+        public UserEntry GetUserByName(string userName)
         {
             return _provider.Database.FirstOrDefault<UserEntry>("WHERE username = @0", userName);
+        }
+
+        public UserEntry GetUserByEmail(string email)
+        {
+            return _provider.Database.FirstOrDefault<UserEntry>("WHERE email = @0", email);
         }
 
         public int Add(UserEntry entry)
@@ -38,15 +43,27 @@ namespace DYH.DAL
             return _provider.Database.Update(entry);
         }
 
-        public int Delete(UserEntry entry)
+        public int Delete(int id)
         {
-            return _provider.Database.Delete(entry);
+            return _provider.Database.Delete("users", "userid", null, id);
         }
 
-        public List<UserEntry> GetList(string condition, int pageSize, int pageIndex, out int records, params object[] args)
+        public int Delete(string ids)
         {
-             var page = _provider.Database.Page<UserEntry>(pageIndex, pageSize, condition, args);
-            records = (int)page.TotalItems;
+            //int iVal = _provider.Database.Delete<UserEntry>("WHERE userid in (" + ids + ") ");
+
+            int iVal = _provider.Database.Delete<UserEntry>(Sql.Builder.WhereIn("userid", ids.Split(',')));
+
+            return iVal;
+        }
+
+
+        public List<UserEntry> GetList(PageModel model)
+        {
+            var page = _provider.Database.Page<UserEntry>(model.PageIndex, model.PageSize, model.Filter, model.Params);
+            model.Records = (int)page.TotalItems;
+            model.PageCount = page.TotalPages;
+
             return page.Items;
         }
     }
