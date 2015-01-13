@@ -1,7 +1,64 @@
-﻿@model IEnumerable<ModuleEntry>
+﻿@using DYH.Core
+@model ModuleEntry
 
 @{
     ViewBag.Title = "Modules";
+     
+}
+
+@helper SubTree(ModuleEntry node)
+{
+    var clsNames = "";
+    if (node.Children.Any() && node.ModuleId != 0)
+    {
+        clsNames = "class=\"dyh-sub-tree\"";
+    }
+    
+    int currentId = DataCast.Get<int>(ViewBag.CurrentId);   
+    <ul @Html.Raw(clsNames)>
+        @foreach (var item in node.Children)
+        {
+            string clsName = string.Empty;
+            if (item.ModuleId == currentId && item.IsActived)
+            {
+                clsName = "current";
+            }
+            else if (item.IsActived)
+            {
+                clsName = "active";
+            }
+
+            var hasChild = item.Children.Any();
+            <li class="@clsName">
+                <a href="#">
+                    @if (hasChild)
+                    {
+                        string clsIcon = "icon-plus-circle";
+                        if (!string.IsNullOrEmpty(clsName))
+                        {
+                            clsIcon = "icon-minus-circle";
+                        }
+                        <span class="shrink">
+                            <i class="@clsIcon"></i>
+                        </span>
+                    }
+                    <span class="title">
+                        @item.DisplayName
+                    </span>
+                </a>
+                <div class="btn-group btn-group-sm tool-bar">
+                    <a href="~/Modules/Create/@item.ModuleId" class="btn btn-default btn-bgcolor powertip" title="Add"><i class="icon-plus"></i></a>
+                    <a href="~/Modules/Edit/@item.ModuleId" class="btn btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
+                    <a href="~/Modules/Delete/@item.ModuleId?ParentId=@item.ParentId" class="btn btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+                </div>
+                @if (hasChild)
+                {
+                    @Html.Raw(SubTree(item))
+                }
+            </li>
+        }
+    </ul>
+
 }
 
 
@@ -16,67 +73,93 @@
     <div class="all-margin">
         <div class="panel panel-default">
             <div class="panel-heading" style="position:relative;">
-                <h3 class="panel-title">Root</h3>
-                <div class="btn-group tool-bar">
-                    <a href="#" class="btn btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
+                <h3 class="panel-title">@Model.DisplayName</h3>
+                <div class="btn-group  tool-bar">
+                    <a href="~/Modules/Create/0" class="btn btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
                 </div>
             </div>
-            <div class="dyh-tree">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <span class="shrink">
-                                <i class="icon-plus-circle"></i>
-                            </span>
-                            <span class="title">
-                                Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard
-                            </span>
-                        </a>
-                        <div class="btn-group tool-bar">
-                            <a href="#" class="btn fancybox fancybox.ajax btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
-                            <a href="#" class="btn fancybox fancybox.ajax edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
-                            <a href="#" class="btn fancybox fancybox.ajax delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
-                        </div>
-                        <ul class="dyh-sub-tree">
-                            <li>
-                                <a href="#">
-                                    <span class="shrink">
-                                        <i class="icon-minus-circle"></i>
-                                    </span>
-                                    <span class="title">
-                                        Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard
-                                    </span>
-                                </a>
-                                <div class="btn-group tool-bar">
-                                    <a href="#" class="btn fancybox fancybox.ajax btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
-                                    <a href="#" class="btn fancybox fancybox.ajax edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
-                                    <a href="#" class="btn fancybox fancybox.ajax delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
-                                </div>
-                                <ul class="dyh-sub-tree">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Setup</a></li>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Company</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Setup</a>
-                                <ul class="dyh-sub-tree">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Setup</a></li>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Company</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">News</a></li>
-                            <li><a href="#">Company</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Setup</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Company</a></li>
-                </ul>
-            </div>
+            @if (Model.Children.Count > 0)
+            {
+                <div class="dyh-tree">
+                    @SubTree(Model)
+                </div>
+            }
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    $(function() {
+        $(".dyh-tree span.shrink").on("click", function() {
+            var icon = $(this).children("i");
+            var hasClass = icon.hasClass("icon-plus-circle");
+            var target = $(this).parent("a").parent("li").children(".dyh-sub-tree");
+            if (hasClass) {
+                target.slideDown(300, "linear", function() {
+                    icon.removeClass("icon-plus-circle").addClass("icon-minus-circle");
+                });
+            } else {
+                target.slideUp(300, "linear", function () {
+                    icon.removeClass("icon-minus-circle").addClass("icon-plus-circle");
+                });
+            }
+            return false;
+        });
+    });
+</script>
+
+@*<ul>
+        <li>
+            <a href="#">
+                <span class="shrink">
+                    <i class="icon-plus-circle"></i>
+                </span>
+                <span class="title">
+                    Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard
+                </span>
+            </a>
+            <div class="btn-group tool-bar">
+                <a href="#" class="btn fancybox fancybox.ajax btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
+                <a href="#" class="btn fancybox fancybox.ajax edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
+                <a href="#" class="btn fancybox fancybox.ajax delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+            </div>
+            <ul class="dyh-sub-tree">
+                <li>
+                    <a href="#">
+                        <span class="shrink">
+                            <i class="icon-minus-circle"></i>
+                        </span>
+                        <span class="title">
+                            Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard Dashboard
+                        </span>
+                    </a>
+                    <div class="btn-group tool-bar">
+                        <a href="#" class="btn fancybox fancybox.ajax btn-default btn-bgcolor" title="Add"><i class="icon-plus"></i></a>
+                        <a href="#" class="btn fancybox fancybox.ajax edit btn-default btn-bgcolor powertip" title="Edit"><i class="icon-edit"></i></a>
+                        <a href="#" class="btn fancybox fancybox.ajax delete btn-default btn-bgcolor powertip" title="Delete"><i class="icon-remove"></i></a>
+                    </div>
+                    <ul class="dyh-sub-tree">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Setup</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Company</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Setup</a>
+                    <ul class="dyh-sub-tree">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Setup</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Company</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Company</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Setup</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Company</a></li>
+    </ul>*@
+

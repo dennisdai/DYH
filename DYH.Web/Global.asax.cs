@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Threading;
 using Autofac;
 using System;
 using System.Collections.Generic;
@@ -57,11 +58,16 @@ namespace DYH.Web
             builder.RegisterType<DataProvider>();
             builder.RegisterType<UserRepository>().As<IUser>();
             builder.RegisterType<ActionRepository>().As<IAction>();
+            builder.RegisterType<ModuleRepository>().As<DYH.IDAL.IModule>();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<ActionsController>().WithParameter(ResolvedParameter.ForNamed<ICacheManager>("dyh_cache_static"));
+            builder.RegisterType<ModulesController>().WithParameter(ResolvedParameter.ForNamed<ICacheManager>("dyh_cache_static"));
            
             var container = builder.Build();
+
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

@@ -287,6 +287,8 @@
     <Content Include="Views\Actions\Create.cshtml" />
     <Content Include="Views\Actions\Edit.cshtml" />
     <Content Include="Views\Modules\Index.cshtml" />
+    <Content Include="Views\Modules\Create.cshtml" />
+    <Content Include="Views\Modules\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

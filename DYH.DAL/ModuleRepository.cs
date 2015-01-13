@@ -44,7 +44,18 @@ namespace DYH.DAL
 
         public int Delete(int moduleId)
         {
-            return _provider.Database.Delete("modules", "moduleid", null, moduleId);
+            var sql = Sql.Builder.Append("WITH RECURSIVE cte AS ( ");
+            sql.Append("SELECT * FROM modules WHERE moduleid = @0", moduleId);
+            sql.Append("UNION ALL");
+            sql.Append("SELECT a.* FROM modules a inner join cte b on b.moduleid = a.parentid ");
+            sql.Append(")");
+
+            sql.Append("DELETE FROM modules");
+            sql.Append("WHERE EXISTS ( SELECT moduleid");
+            sql.Append("FROM cte");
+            sql.Append("WHERE cte.moduleid = modules.moduleid )");
+
+            return _provider.Database.Execute(sql);
         }
     }
 }

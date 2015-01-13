@@ -56,6 +56,7 @@
     <Compile Include="UserEntry.cs" />
     <Compile Include="ViewModel\LoginModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\TreeNodeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DYH.Data\DYH.Data.csproj">

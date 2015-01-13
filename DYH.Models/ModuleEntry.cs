@@ -4,14 +4,21 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
 using DYH.Data;
 
 namespace DYH.Models
 {
     [TableName("modules")]
     [PrimaryKey("moduleid")]
+    [Serializable]
     public class ModuleEntry
     {
+        public ModuleEntry()
+        {
+            Children = new List<ModuleEntry>();
+        }
+
         [Column("moduleid")]
         public int ModuleId { get; set; }
         [Column("parentid")]
@@ -19,6 +26,7 @@ namespace DYH.Models
 
         [Required]
         [DisplayName("Module/Menu Code")]
+        [Remote("CheckCode", "Modules", ErrorMessage = "Module code has been used, please changed one.")]
         [Column("modulecode")]
         public string ModuleCode { get; set; }
 
@@ -29,7 +37,7 @@ namespace DYH.Models
 
         [DisplayName("Display As Menu")]
         [Column("displayasmenu")]
-        public bool? DisplayAsMenu { get; set; }
+        public bool DisplayAsMenu { get; set; }
 
         [DisplayName("Class Name")]
         [Column("classname")]
@@ -46,17 +54,27 @@ namespace DYH.Models
         [DisplayName("Description")]
         [Column("description")]
         public string Description { get; set; }
-        
+
         [Column("createdby")]
         public string CreatedBy { get; set; }
-        
+
         [Column("createdtime")]
         public DateTime? CreatedTime { get; set; }
-        
+
         [Column("changedby")]
         public string ChangedBy { get; set; }
-        
+
         [Column("changedtime")]
         public DateTime? ChangedTime { get; set; }
+
+        [DisplayName("Parent Name")]
+        [Ignore]
+        public string NonParent { get; set; }
+
+        [Ignore]
+        public List<ModuleEntry> Children { get; private set; }
+
+        [Ignore]
+        public bool IsActived { get; set; }
     }
 }

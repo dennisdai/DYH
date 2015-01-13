@@ -747,7 +747,6 @@ span.input-icon {
     top: 102px;
     right: 0;
     bottom: 0;
-   
     left: 220px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -885,15 +884,16 @@ th.btn-item2 {
     border-bottom: 1px solid #ddd;
 }
 
-.dyh-tree ul > li  > .tool-bar {
-    position: absolute;
-    right: 2px;
-    top: 0;
-}
+    .dyh-tree ul > li > .tool-bar {
+        position: absolute;
+        right: 4px;
+        top: 2px;
+    }
 
-.dyh-tree ul > li  > .tool-bar > a {
-    margin: 0;
-}
+        .dyh-tree ul > li > .tool-bar > a {
+            margin: 0;
+        }
+
     .dyh-tree ul > li:last-child {
         border-bottom: none;
     }
@@ -911,7 +911,7 @@ th.btn-item2 {
             border-radius: 2px;
         }
 
-        .dyh-tree ul > li> a > span.shrink {
+        .dyh-tree ul > li > a > span.shrink {
             font-size: 2.6em;
             position: relative;
             line-height: 20px;
@@ -920,23 +920,28 @@ th.btn-item2 {
 
 
     .dyh-tree ul > li > ul.dyh-sub-tree {
-        display: block;
+        display: none;
         border-top: 1px solid #ddd;
         padding-left: 20px;
-        margin-left: 2px;
+        /*margin-left: 2px;*/
     }
 
-        .dyh-tree ul > li > ul.dyh-sub-tree:before {
-            content: "";
-            position: absolute;
-            left: 20px;
-            border-left: 1px dashed #c4c4c4;
-            /* display: inline-block; */
-            /* overflow: hidden; */
-            /* height: 200px; */
-            top: 3.0em;
-            bottom: 1.6em;
-        }
+.dyh-tree ul li.current > ul.dyh-sub-tree,
+.dyh-tree ul li.active > ul.dyh-sub-tree {
+    display: block;
+}
+
+.dyh-tree ul > li > ul.dyh-sub-tree:before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    border-left: 1px dashed #c4c4c4;
+    /* display: inline-block; */
+    /* overflow: hidden; */
+    /* height: 200px; */
+    top: 3.0em;
+    bottom: 1.6em;
+}
 
 
 .dyh-tree ul li > ul.dyh-sub-tree > li {
@@ -953,15 +958,15 @@ ul.dyh-sub-tree li > a {
     /*border-bottom: 1px dashed #ccc !important;*/
 }
 
-ul.dyh-sub-tree li > a:before {
-    content: "";
-    border-bottom: 1px dashed #c4c4c4;
-    position: absolute;
-    top: 16px;
-    width: 12px;
-    display: block;
-    left: 0;
-}
+    ul.dyh-sub-tree li > a:before {
+        content: "";
+        border-bottom: 1px dashed #c4c4c4;
+        position: absolute;
+        top: 16px;
+        width: 12px;
+        display: block;
+        left: 0;
+    }
 
 /*ul.dyh-sub-tree a.brother{
     border-bottom: none !important;
@@ -975,7 +980,44 @@ ul.dyh-sub-tree li > a:hover {
     border-left: none;
 }
 
-ul.dyh-sub-tree li > a:hover::before {
+    ul.dyh-sub-tree li > a:hover::before {
+        content: "";
+        border-bottom: none;
+        position: absolute;
+        top: 16px;
+        width: 12px;
+        display: block;
+        left: 0;
+    }
+    .dyh-tree ul > li:last-child ul.dyh-sub-tree {
+    /*隐藏底部线条*/
+    margin-bottom: -1px;
+}
+ul.dyh-sub-tree ul.dyh-sub-tree {
+    /*border-top: 1px solid #ccc !important;*/
+    border-bottom: 1px solid #ddd !important;
+}
+
+.dyh-tree ul li.active > a > span.title {
+    color: #e8440f;
+    font-weight: bold !important;
+}
+
+.dyh-tree ul li.current > a {
+    color: #fff;
+    font-weight: normal;
+    background: #428bca;
+    border-radius: 2px;
+}
+
+/*.dyh-tree ul li.active > ul.dyh-sub-tree > a {
+    color: #fff;
+    font-weight: normal;
+    background: #428bca;
+    border-radius: 2px;
+}*/
+
+.dyh-tree ul li.current > a::before {
     content: "";
     border-bottom: none;
     position: absolute;
@@ -985,12 +1027,14 @@ ul.dyh-sub-tree li > a:hover::before {
     left: 0;
 }
 
-ul.dyh-sub-tree ul.dyh-sub-tree {
-    /*border-top: 1px solid #ccc !important;*/
-    border-bottom: 1px solid #ddd !important;
+
+.dyh-tree ul li > ul.dyh-sub-tree > li.current > .dyh-sub-tree > a,
+.dyh-tree ul li > ul.dyh-sub-tree > li > .dyh-sub-tree > a:hover {
+    color: #fff;
+    font-weight: normal;
+    background: #428bca;
+    border-radius: 2px;
 }
-
-
 
 
 

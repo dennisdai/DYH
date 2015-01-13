@@ -280,7 +280,13 @@ label {
     margin-left: 0;
 }
 
+.radio label, .checkbox label {
+    line-height: 20px;
+}
 
+.radio label span, .checkbox label span {
+    padding-left: 5px;
+}
 
 
 /* jquery ui css extend*/

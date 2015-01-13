@@ -1,0 +1,90 @@
+﻿@model ModuleEntry
+@{
+    ViewBag.Title = "New Module/Menu";
+}
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <div class="breadcrumb">
+        <a href="#">Setup</a>
+        <a href="~/Modules/Index">User List</a>
+        <a href="#" class="active">@ViewBag.Title</a>
+    </div>
+</div>
+
+<section id="container">
+    <div class="all-margin">
+        <form action="~/Modules/Create" method="post" class="form-horizontal">
+            @Html.AntiForgeryToken()
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.NonParent, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    <input type="text" name="NonParent" class="form-control" value="@Model.NonParent" disabled />
+                    @Html.HiddenFor(x => x.ParentId)
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.ModuleCode, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.ModuleCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ModuleCode)
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.DisplayName, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.DisplayName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.DisplayName)
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(x => x.DisplayAsMenu)
+                            <span>Display As Module/Menu</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.SeqNo, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.SeqNo, new { @class = "form-control", Value = "" })
+                    @Html.ValidationMessageFor(x => x.SeqNo)
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.ClassName, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.ClassName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.Url, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(x => x.Url, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(x => x.Description, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control", style = "height:80px;" })
+                </div>
+            </div>
+
+            <div class="form-group"></div>
+            <div class="form-group text-center col-sm-8">
+                <a href="#" class="btn btn-info btn-sm">Cancel</a>
+                <span class="btn-space"></span>
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+            </div>
+        </form>
+    </div>
+</section>
