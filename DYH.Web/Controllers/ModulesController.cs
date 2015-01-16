@@ -34,6 +34,16 @@ namespace DYH.Web.Controllers
             return View(model);
         }
 
+        [ChildActionOnly]
+        public ActionResult Carte()
+        {
+            var id = DataCast.Get<int>(ViewBag.CurrentMenuID);
+            var list = _cache.Get(Constants.CACHE_KEY_MODULES, () => _module.GetList());
+            var model = GetTree(list, id);
+
+            return View(model);
+        }
+
         public static ModuleEntry GetTree(IEnumerable<ModuleEntry> list, int currentId)
         {
             var root = new ModuleEntry

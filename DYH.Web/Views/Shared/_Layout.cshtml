@@ -172,7 +172,8 @@
             </div>
         </header>
         <div class="primary-content">
-            <aside class="nav-aside">
+            @Html.Action("Carte", "Modules")
+            @*<aside class="nav-aside">
                 <nav class="nav-wrapper">
                     <ul class="carte">
                         <li>
@@ -299,7 +300,7 @@
                         </li>
                     </ul>
                 </nav>
-            </aside>
+            </aside>*@
             <section id="main-container">
 
                 @RenderBody()

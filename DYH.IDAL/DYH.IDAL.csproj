@@ -42,7 +42,8 @@
   <ItemGroup>
     <Compile Include="IAction.cs" />
     <Compile Include="IModule.cs" />
-    <Compile Include="IUsers.cs" />
+    <Compile Include="IRole.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using DYH.Web.Framework.Filter;
 
 namespace DYH.Web
 {
@@ -8,6 +9,7 @@ namespace DYH.Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new GlobalFilterAttribute());
         }
     }
 }

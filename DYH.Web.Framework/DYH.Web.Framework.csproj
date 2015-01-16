@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseController.cs" />
+    <Compile Include="Filter\GlobalFilterAttribute.cs" />
     <Compile Include="HtmlExtension.cs" />
     <Compile Include="Operations.cs" />
     <Compile Include="Pagination.cs" />
