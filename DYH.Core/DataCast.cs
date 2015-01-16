@@ -103,7 +103,7 @@ namespace DYH.Core
 
         public static bool IsNull(object value)
         {
-            if (object.Equals(null, value))
+            if (Equals(null, value))
             {
                 return true;
             }
@@ -111,6 +111,7 @@ namespace DYH.Core
             {
                 return true;
             }
+
             return false;
         }
     }

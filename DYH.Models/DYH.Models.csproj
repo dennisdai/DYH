@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionEntry.cs" />
+    <Compile Include="ActionModuleEntry.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ModuleEntry.cs" />
     <Compile Include="PageEntry.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="ResultEntry.cs" />
     <Compile Include="RoleEntry.cs" />
     <Compile Include="UserEntry.cs" />
+    <Compile Include="UserRoleEntry.cs" />
     <Compile Include="ViewModel\LoginModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\TreeNodeEntry.cs" />

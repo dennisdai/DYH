@@ -46,9 +46,12 @@ namespace DYH.Web
             builder.RegisterType<ActionRepository>().As<IAction>();
             builder.RegisterType<ModuleRepository>().As<DYH.IDAL.IModule>();
             builder.RegisterType<RoleRepository>().As<IRole>();
+            builder.RegisterType<ActionModuleRepository>().As<IActionModule>();
+            builder.RegisterType<UserRoleRepository>().As<IUserRole>();
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
+            builder.RegisterType<UsersController>().WithParameter(ResolvedParameter.ForNamed<ICacheManager>("dyh_cache_static"));
             builder.RegisterType<ActionsController>().WithParameter(ResolvedParameter.ForNamed<ICacheManager>("dyh_cache_static"));
             builder.RegisterType<ModulesController>().WithParameter(ResolvedParameter.ForNamed<ICacheManager>("dyh_cache_static"));
             builder.RegisterType<RolesController>().WithParameter(ResolvedParameter.ForNamed<ICacheManager>("dyh_cache_static"));

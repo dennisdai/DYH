@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DYH.Core;
+using DYH.Core.Caching;
 using DYH.IDAL;
 using DYH.Models;
 using DYH.Models.ViewModel;
@@ -17,10 +18,17 @@ namespace DYH.Web.Controllers
 {
     public class UsersController : Controller
     {
-        private IUser _user;
-        public UsersController(IUser user)
+        private readonly IUser _user;
+        private readonly IRole _role;
+        private readonly IUserRole _userRole;
+        private readonly ICacheManager _cache;
+
+        public UsersController(IUser user, IRole role, IUserRole userRole, ICacheManager cache)
         {
             _user = user;
+            _role = role;
+            _userRole = userRole;
+            _cache = cache;
         }
 
         [HttpGet]
@@ -29,7 +37,7 @@ namespace DYH.Web.Controllers
             Utility.GetModelState(this);
 
             var model = new LoginViewModel();
-
+            
             string langKey = "en-US";
             var cookie = Request.Cookies["DYH.COOKIES"];
             if (cookie == null || string.IsNullOrEmpty(cookie["Language"]))
@@ -214,11 +222,14 @@ namespace DYH.Web.Controllers
 
         public ActionResult Create()
         {
+            var roles = _cache.Get(Constants.CACHE_KEY_ROLES, () => _role.GetList());
+            ViewBag.Roles = roles;
+
             return View();
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Create(UserEntry model)
+        public ActionResult Create(UserEntry model, FormCollection collection)
         {
             if (_user.GetUserByName(model.UserName) != null)
             {
@@ -239,7 +250,18 @@ namespace DYH.Web.Controllers
                 if (Request.Cookies["LanguageKey"] != null)
                     model.Language = Request.Cookies["LanguageKey"].ToString();
 
-                Utility.Operate(this, Operations.Add, () => _user.Add(model), model.UserName);
+                Utility.Operate(this, Operations.Add, () =>
+                {
+                    int userId = _user.Add(model);
+                    _cache.Remove(Constants.CACHE_KEY_USERROLE);
+                    if (userId > 0)
+                    {
+                        var list = SetUserRoles(collection, userId);
+                        _userRole.Add(list);
+                    }
+
+                    return userId;
+                }, model.UserName);
             }
             else
             {
@@ -252,6 +274,12 @@ namespace DYH.Web.Controllers
         public ActionResult Edit(int id)
         {
             var info = _user.GetUserById(id);
+            var roles = _cache.Get(Constants.CACHE_KEY_ROLES, () => _role.GetList());
+            ViewBag.Roles = roles;
+
+            var userRoles = _cache.Get(Constants.CACHE_KEY_USERROLE, () => _userRole.GetList());
+            ViewBag.UserRoles = userRoles;
+
             return View(info);
         }
 
@@ -307,41 +335,21 @@ namespace DYH.Web.Controllers
                 info.ChangedBy = Utility.CurrentUserName;
                 info.ChangedTime = DateTime.UtcNow;
 
-                Utility.Operate(this, Operations.Update, () => _user.Update(info), info.UserName);
+                Utility.Operate(this, Operations.Update, () =>
+                {
+                    _cache.Remove(Constants.CACHE_KEY_USERROLE);
 
-                //var roles = RoleService.GetList();
-                //var list = new List<UserRoleEntity>();
-                //foreach (var item in roles)
-                //{
-                //    var model = new UserRoleEntity();
-                //    var ChkName = "Role_" + item.RoleID;
+                    var list = SetUserRoles(collection, info.UserId);
+                    var adds = list.Where(x => x.UserRoleId == 0);
+                    if (adds.Any())
+                        _userRole.Add(adds);
 
-                //    var ChkVal = collection[ChkName];
-                //    var UserRole = "UserRole_" + item.RoleID;
-                //    var UserRoleID = DataCast.ToInt(collection[UserRole]);
+                    var updates = list.Where(x => x.UserRoleId != 0);
+                    if (updates.Any())
+                        _userRole.Update(updates);
 
-                //    if (ChkVal == "on")
-                //    {
-                //        model.RoleID = item.RoleID;
-                //        model.UserID = info.UserID;
-                //        model.UserRoleID = UserRoleID;
-                //    }
-                //    else
-                //    {
-                //        model.RoleID = 0;
-                //        model.UserID = 0;
-                //        model.UserRoleID = UserRoleID;
-                //    }
-
-                //    list.Add(model);
-                //}
-
-                //var dt = DataCast.ListToDataTable(list);
-
-                //Utils.Operate(this, OperateTypes.Update, () =>
-                //{
-                //    return UserService.Update(info, dt);
-                //}, info.UserName);
+                    return _user.Update(info);
+                }, info.UserName);
             }
             else
             {
@@ -363,6 +371,35 @@ namespace DYH.Web.Controllers
             var page = Pagination.CheckPageIndexWhenDeleted(this, iVal);
             return Redirect(string.Format("~/Users/Index?page={0}", page));
         }
+
+        private List<UserRoleEntry> SetUserRoles(FormCollection collection, int userId)
+        {
+            var roles = _cache.Get(Constants.CACHE_KEY_ROLES, () => _role.GetList());
+            var list = new List<UserRoleEntry>();
+
+            foreach (var item in roles)
+            {
+                var chkName = "Role_" + item.RoleId;
+                var chkVal = collection[chkName];
+                var userRoleIdKey = "UserRole_" + item.RoleId;
+
+                string userRoleIdValue = collection[userRoleIdKey];
+                var userRoleId = string.IsNullOrEmpty(userRoleIdValue) ? 0 : DataCast.Get<int>(userRoleIdValue);
+
+                var model = new UserRoleEntry()
+                {
+                    RoleId = item.RoleId,
+                    UserId = userId,
+                    UserRoleId = userRoleId,
+                    Status = chkVal == "on"
+                };
+
+                list.Add(model);
+            }
+
+            return list;
+        }
+
 
         [Authorize]
         public JsonResult CheckUserName(string userName)

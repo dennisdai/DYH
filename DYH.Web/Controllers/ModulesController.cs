@@ -15,10 +15,14 @@ namespace DYH.Web.Controllers
     public class ModulesController : BaseController
     {
         private readonly IModule _module;
+        private readonly IAction _action;
+        private readonly IActionModule _actionModule;
         private readonly ICacheManager _cache;
-        public ModulesController(IModule module, ICacheManager cache)
+        public ModulesController(IModule module, IAction action, IActionModule actionModule, ICacheManager cache)
         {
             _module = module;
+            _action = action;
+            _actionModule = actionModule;
             _cache = cache;
         }
 
@@ -97,11 +101,14 @@ namespace DYH.Web.Controllers
                 NonParent = id == 0 ? "Root" : (info != null ? info.DisplayName : "Root")
             };
 
+            var list = _cache.Get(Constants.CACHE_KEY_ACTIONS, () => _action.GetList());
+            ViewBag.Actions = list;
+
             return View(module);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Create(ModuleEntry model)
+        public ActionResult Create(ModuleEntry model, FormCollection collection)
         {
             var info = _module.GetByCode(model.ModuleCode);
 
@@ -117,7 +124,17 @@ namespace DYH.Web.Controllers
                 Utility.Operate(this, Operations.Add, () =>
                 {
                     _cache.Remove(Constants.CACHE_KEY_MODULES);
-                    return _module.Add(model);
+                    _cache.Remove(Constants.CACHE_KEY_ACTIONMODULE);
+
+                    var moduleId = _module.Add(model);
+                    if (moduleId > 0)
+                    {
+                        var actionModules = SetActionModules(collection, moduleId);
+                        _actionModule.Add(actionModules);
+                    }
+
+                    return moduleId;
+
                 }, model.DisplayName);
             }
             else
@@ -155,16 +172,22 @@ namespace DYH.Web.Controllers
                 info.NonParent = list.FirstOrDefault(x => x.ModuleId == info.ParentId).DisplayName;
             }
 
+            var actions = _cache.Get(Constants.CACHE_KEY_ACTIONS, () => _action.GetList());
+            ViewBag.Actions = actions;
+
+            var actionModules = _cache.Get(Constants.CACHE_KEY_ACTIONMODULE, () => _actionModule.GetList());
+            ViewBag.ActionModules = actionModules.Where(x => x.ModuleId == id);
+
             return View(info);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(ModuleEntry model)
+        public ActionResult Edit(ModuleEntry model, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
-                var list = _cache.Get(Constants.CACHE_KEY_MODULES, () => _module.GetList());
-                var info = list.FirstOrDefault(x => x.ModuleId == model.ModuleId);
+                var modules = _cache.Get(Constants.CACHE_KEY_MODULES, () => _module.GetList());
+                var info = modules.FirstOrDefault(x => x.ModuleId == model.ModuleId);
 
                 if (info != null)
                 {
@@ -175,9 +198,20 @@ namespace DYH.Web.Controllers
                 model.ChangedTime = DateTime.UtcNow;
                 model.ChangedBy = Utility.CurrentUserName;
 
+                var actionModules = SetActionModules(collection, model.ModuleId);
                 Utility.Operate(this, Operations.Update, () =>
                 {
                     _cache.Remove(Constants.CACHE_KEY_MODULES);
+                    _cache.Remove(Constants.CACHE_KEY_ACTIONMODULE);
+
+                    var adds = actionModules.Where(x => x.ActionModuleId == 0);
+                    if (adds.Any())
+                        _actionModule.Add(adds);
+
+                    var updates = actionModules.Where(x => x.ActionModuleId != 0);
+                    if (updates.Any())
+                        _actionModule.Update(updates);
+
                     return _module.Update(model);
                 }, model.DisplayName);
             }
@@ -198,6 +232,40 @@ namespace DYH.Web.Controllers
             });
 
             return Redirect("~/Modules/Index/" + parentId);
+        }
+
+        private List<ActionModuleEntry> SetActionModules(FormCollection collection, int moduleId)
+        {
+            var actionIDs = collection["ActionModule"];
+            var actionModuleIDs = collection["ActionModuleId"];
+
+            var list = new List<string>();
+            if (!string.IsNullOrEmpty(actionIDs))
+            {
+                list = actionIDs.Split(',').ToList();
+            }
+
+            var arrIDs = actionModuleIDs.Split(',');
+
+            var actions = _cache.Get(Constants.CACHE_KEY_ACTIONS, () => _action.GetList());
+
+            var actionModules = new List<ActionModuleEntry>();
+            for (var i = 0; i < actions.Count(); i++)
+            {
+                var actionModuleId = DataCast.Get<int>(arrIDs[i]);
+                int actionId = actions.ElementAt(i).ActionId;
+                var amInfo = new ActionModuleEntry
+                {
+                    ActionId = actionId,
+                    ModuleId = moduleId,
+                    Status = list.Any(x => x == actionId.ToString()),
+                    ActionModuleId = actionModuleId
+                };
+
+                actionModules.Add(amInfo);
+            }
+
+            return actionModules;
         }
     }
 }

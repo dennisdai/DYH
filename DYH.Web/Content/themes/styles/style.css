@@ -1,7 +1,7 @@
 body {
     font-size: .85em;
     font-family: /*"Segoe UI"*/ Arial, Verdana, Helvetica, Sans-Serif;
-    color: #232323;
+    color: #383838;
     background-color: #fff;
     overflow-y: hidden;
 }
@@ -989,10 +989,12 @@ ul.dyh-sub-tree li > a:hover {
         display: block;
         left: 0;
     }
-    .dyh-tree ul > li:last-child ul.dyh-sub-tree {
+
+.dyh-tree ul > li:last-child ul.dyh-sub-tree {
     /*隐藏底部线条*/
     margin-bottom: -1px;
 }
+
 ul.dyh-sub-tree ul.dyh-sub-tree {
     /*border-top: 1px solid #ccc !important;*/
     border-bottom: 1px solid #ddd !important;
@@ -1010,22 +1012,22 @@ ul.dyh-sub-tree ul.dyh-sub-tree {
     border-radius: 2px;
 }
 
-/*.dyh-tree ul li.active > ul.dyh-sub-tree > a {
+    /*.dyh-tree ul li.active > ul.dyh-sub-tree > a {
     color: #fff;
     font-weight: normal;
     background: #428bca;
     border-radius: 2px;
 }*/
 
-.dyh-tree ul li.current > a::before {
-    content: "";
-    border-bottom: none;
-    position: absolute;
-    top: 16px;
-    width: 12px;
-    display: block;
-    left: 0;
-}
+    .dyh-tree ul li.current > a::before {
+        content: "";
+        border-bottom: none;
+        position: absolute;
+        top: 16px;
+        width: 12px;
+        display: block;
+        left: 0;
+    }
 
 
 .dyh-tree ul li > ul.dyh-sub-tree > li.current > .dyh-sub-tree > a,
@@ -1153,3 +1155,86 @@ a:focus, button:focus {
         text-align: center;
         line-height: 30px;
     }
+
+.ul-list {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+    .ul-list li.title:first-child {
+        background: #F2F2F2;
+        background-image: -webkit-linear-gradient(top, #f8f8f8 0%, #ececec 100%);
+        background-image: -o-linear-gradient(top, #f8f8f8 0%, #ececec 100%);
+        background-image: linear-gradient(to bottom, #f8f8f8 0%, #ececec 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8', endColorstr='#ffececec', GradientType=0);
+        text-align: center;
+        line-height: 34px;
+        height: 34px;
+        font-weight: bold;
+        font-size: 1.6em;
+        border-radius: 4px 4px 0 0;
+        color: #383838;
+    }
+
+    .ul-list li div.checkbox {
+        background: #fefefe; /* Old browsers */
+        /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZlZmVmZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZiZmJmYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmN2Y4ZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #fefefe 0%, #fbfbfb 50%, #f7f8f9 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(50%,#fbfbfb), color-stop(100%,#f7f8f9)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #fefefe 0%,#fbfbfb 50%,#f7f8f9 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #fefefe 0%,#fbfbfb 50%,#f7f8f9 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #fefefe 0%,#fbfbfb 50%,#f7f8f9 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #fefefe 0%,#fbfbfb 50%,#f7f8f9 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#f7f8f9',GradientType=0 ); /* IE6-8 */
+        padding-left: 10px;
+        border-top: 1px solid #ccc;
+    }
+
+    .ul-list li:first-child div.checkbox {
+        border-top: none;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .ul-list li:last-child div.checkbox {
+        border-radius: 0 0 4px 4px;
+    }
+
+    .ul-list li div.checkbox label {
+        display: block;
+        width: auto;
+        line-height: 34px;
+    }
+
+        .ul-list li div.checkbox label > input[type='checkbox'] {
+            position: static;
+            margin: 0;
+            margin-top: -2px;
+        }
+
+.ul-chk-list {
+    overflow: hidden;
+    margin: 0 0 10px 0;
+    padding-right: 10px;
+    border-top: 1px solid #ccc;
+}
+
+    .ul-chk-list li {
+        float: left;
+        border: 1px solid #dedede;
+        margin: 10px 0 0 10px;
+        border-radius: 3px;
+        min-width: 100px;
+    }
+
+        .ul-chk-list li > label {
+            line-height: 35px;
+            display: inline-block;
+            padding: 0 10px 0 15px;
+            margin: 0;
+        }
+
+            .ul-chk-list li > label > span {
+                padding: 0 4px;
+            }

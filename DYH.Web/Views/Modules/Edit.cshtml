@@ -1,12 +1,14 @@
 ﻿@model ModuleEntry
 @{
     ViewBag.Title = "Edit Module/Menu";
+    var actions = ViewBag.Actions as IEnumerable<ActionEntry>;
+    var actionModules = (ViewBag.ActionModules as IEnumerable<ActionModuleEntry> ?? new List<ActionModuleEntry>());
 }
 
 <div class="breadcrumbs" id="breadcrumbs">
     <div class="breadcrumb">
         <a href="#">Setup</a>
-        <a href="~/Modules/Index">User List</a>
+        <a href="~/Modules/Index/@Model.ModuleId">Modules</a>
         <a href="#" class="active">@ViewBag.Title</a>
     </div>
 </div>
@@ -42,7 +44,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-5">
-                    <div class="checkbox">
+                    <div class="checkbox custom-bg">
                         <label>
                             @Html.CheckBoxFor(x => x.DisplayAsMenu)
                             <span>Display As Module/Menu</span>
@@ -79,9 +81,41 @@
                     @Html.TextAreaFor(x => x.Description, new { @class = "form-control", style = "height:80px;" })
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Relating Actions to Module</label>
+                <div class="col-sm-5">
+                    <ul class="ul-list">
+                        @foreach (var item in (actions ?? new List<ActionEntry>()))
+                        {
+                            var info = actionModules.FirstOrDefault(x => x.ActionId == item.ActionId);
+                            string strChecked = string.Empty;
+                            int actionModuleId = 0;
+                            if (info != null)
+                            {
+                                if (info.Status)
+                                {
+                                    strChecked = "checked";
+                                }
+                                actionModuleId = info.ActionModuleId;
+                            }
+                            
+                            <li>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="ActionModule" value="@item.ActionId" @strChecked />
+                                        <input type="hidden" name="ActionModuleId" value="@actionModuleId" />
+                                        <span>@item.DisplayName</span>
+                                    </label>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
 
             <div class="form-group"></div>
-            <div class="form-group text-center col-sm-10">
+            <div class="form-group text-center col-sm-11">
                 <a href="~/Modules/Index/@Model.ModuleId" class="btn btn-info btn-sm">Cancel</a>
                 <span class="btn-space"></span>
                 <button type="submit" class="btn btn-primary btn-sm">Save</button>
