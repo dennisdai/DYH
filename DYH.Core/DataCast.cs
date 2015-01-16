@@ -75,8 +75,16 @@ namespace DYH.Core
                 case TypeCode.UInt16:
                 case TypeCode.UInt32:
                 case TypeCode.UInt64:
-                    return (T)convertible.ToType(typeof(T), CultureInfo.InvariantCulture);
+                    try
+                    {
+                        return (T) convertible.ToType(typeof (T), CultureInfo.InvariantCulture);
+                    }
+                    catch
+                    {
+                        return default(T);
+                    }
             }
+
             return (T)value;
         }
 
