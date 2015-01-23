@@ -235,6 +235,7 @@ a {
     transition: all 0.5s;
 }
 
+
 .carte a {
     color: #767676;
 }
@@ -342,7 +343,7 @@ a {
 }
 
 .carte li:last-child ul.carte-children {
-    /*éšè—åº•éƒ¨çº¿æ¡*/
+    /*Òþ²Øµ×²¿ÏßÌõ*/
     margin-bottom: -1px;
 }
 
@@ -352,21 +353,21 @@ ul.carte-children ul.carte-children {
     border-bottom: 1px solid #ddd;
 }
 
-/*å¤ä½ç¬¬ä¸€çº§*/
+/*¸´Î»µÚÒ»¼¶*/
 .carte > li > ul.carte-children {
     margin-left: 0;
 }
 
 .carte li > ul.carte-children > li {
     border-bottom: none;
-    /*å¦‚æžœåªæœ‰2å±‚ï¼Œå¼€å¯*/
+    /*Èç¹ûÖ»ÓÐ2²ã£¬¿ªÆô*/
     /*border-left: 1px dashed #CCC;*/
 }
 
     .carte li > ul.carte-children > li > a {
         position: relative;
         padding-left: 12px;
-        /*è¶…è¿‡2å±‚å¼€å¯*/
+        /*³¬¹ý2²ã¿ªÆô*/
         border-left: 1px dashed #CCC;
         background: #FFF url(../images/line.dashed.png) no-repeat -25px center;
         font-weight: normal;
@@ -907,7 +908,7 @@ th.btn-item2 {
             color: #fff;
             font-weight: normal;
             background: #428bca;
-            -ms-border-radius: 2px;
+            /*-ms-border-radius: 2px;*/
             border-radius: 2px;
         }
 
@@ -951,7 +952,7 @@ th.btn-item2 {
 
 ul.dyh-sub-tree li > a {
     padding-left: 12px;
-    /*è¶…è¿‡2å±‚å¼€å¯*/
+    /*³¬¹ý2²ã¿ªÆô*/
     /*border-left: 1px dashed #CCC;*/
     /*background: #FFF url(../images/line.dashed.png) no-repeat -25px center;*/
     font-weight: normal;
@@ -991,7 +992,7 @@ ul.dyh-sub-tree li > a:hover {
     }
 
 .dyh-tree ul > li:last-child ul.dyh-sub-tree {
-    /*éšè—åº•éƒ¨çº¿æ¡*/
+    /*Òþ²Øµ×²¿ÏßÌõ*/
     margin-bottom: -1px;
 }
 
@@ -1238,3 +1239,212 @@ a:focus, button:focus {
             .ul-chk-list li > label > span {
                 padding: 0 4px;
             }
+
+/* cascade-menu */
+.cascade-box {
+    /*width: auto;
+    float: left;*/
+    border-right: 1px solid #DEDEDE;
+    border-left: 1px solid #DEDEDE;
+    margin-left: -1px;
+}
+
+    .cascade-box li.title {
+        border-bottom: 1px solid #DEDEDE;
+        background: url(../img/caption_bg.png) repeat-x 0px -15px;
+        text-align: center;
+    }
+
+        .cascade-box li.title a {
+            display: block;
+            margin: 2px;
+            padding: 8px 0px 9px 0px;
+        }
+
+    /*.cascade-box li.title > a.current,
+        .cascade-box li.title > a:hover {
+            background: #428bca;
+            border-radius: 2px;
+            color: #fff;
+        }*/
+
+    .cascade-box ul > li {
+       
+        text-align: left;
+        border-bottom: 1px solid #DEDEDE;
+    }
+
+.cascade-item-box > a { 
+    position: relative;
+    display: block;
+    padding: 8px 10px;
+    color: #777;
+    /*ÏÂÃæ×Óul margin-left:3px; */
+    margin: 2px;
+}
+
+.cascade-box ul li > .cascade-item-box > ul.cascade-item-tools {
+    display: none;
+    width: auto;
+}
+
+.cascade-item-box:hover > ul.cascade-item-tools {
+    display: block !important;
+    left: 240px;
+    position: absolute;
+    border: 1px solid #dedede;
+    min-width: 140px;
+    z-index: 2;
+    box-shadow: 10px 6px 12px rgba(0,0,0,0.1);
+    margin-top: -35px;
+    background-color: #fff;
+}
+
+.cascade-item-box > ul.cascade-item-tools a {
+    display: block;
+    padding: 7px 10px;
+    margin: 2px;
+}
+
+.cascade-item-box > ul.cascade-item-tools > li:last-child {
+    border-bottom: none;
+}
+
+.cascade-item-box > ul.cascade-item-tools a > i {
+    font-size: 14px;
+}
+
+.cascade-item-box > ul.cascade-item-tools a > span {
+    margin-left: 5px;
+}
+
+.cascade-box ul li > ul.cascade-children {
+    display: none;
+    padding-left: 10px;
+    margin-left: 2px;
+}
+
+.cascade-box ul li.current > ul.cascade-children,
+.cascade-box ul li.active > ul.cascade-children {
+    display: block;
+}
+
+.cascade-box ul > li:last-child ul.cascade-children {
+    /*Òþ²Øµ×²¿ÏßÌõ*/
+    margin-bottom: -1px;
+}
+
+.cascade-box > ul > li > ul.cascade-children {
+    border-top: 1px solid #ddd;
+    /*¸´Î»µÚÒ»¼¶*/
+    margin: 0;
+}
+
+ul.cascade-children ul.cascade-children {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+
+.cascade-box ul li > ul.cascade-children > li:before {
+    /*width: 10px;
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 14px;
+    border-top: 1px dashed #ccd7e2;*/
+}
+
+.cascade-box ul li > ul.cascade-children > li {
+    border-bottom: none;
+    /*Èç¹ûÖ»ÓÐ2²ã£¬¿ªÆô*/
+    /*border-left: 1px dashed #CCC;*/
+}
+
+    .cascade-box ul li > ul.cascade-children > li > .cascade-item-box > a {
+        padding-left: 12px;
+        /*³¬¹ý2²ã¿ªÆô*/
+        border-left: 1px dashed #CCC;
+        background: #FFF url(../images/line.dashed.png) no-repeat -25px center;
+        font-weight: normal;
+    }
+
+.cascade-item-box > a:hover,
+.cascade-item-box > ul.cascade-item-tools a:hover {
+    color: #fff;
+    font-weight: normal;
+    background: #428bca;
+    border-radius: 2px;
+}
+
+.cascade-box ul li.active > div.cascade-item-box > a {
+    color: #e8440f;
+    font-weight: bold !important;
+}
+
+.cascade-box ul li.current > div.cascade-item-box > a {
+    color: #fff;
+    font-weight: normal;
+    background: #428bca;
+    border-radius: 2px;
+}
+
+.cascade-box ul li > ul.cascade-children > li.current > .cascade-item-box > a,
+.cascade-box ul li > ul.cascade-children > li > .cascade-item-box > a:hover {
+    color: #fff;
+    font-weight: normal;
+    background: #428bca;
+    border-radius: 2px;
+}
+
+.cascade-box a {
+    text-decoration: none;
+}
+
+.cascade-box p.title {
+    line-height: 36px;
+    height: 36px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.cascade-item-box > a > .icon-has-ul {
+    position: absolute;
+    top: 29%;
+    right: 10px;
+}
+
+.cascade-box li > a:hover > .icon-has-ul,
+.cascade-box li.current > a > .icon-has-ul {
+    color: #fff;
+}
+
+.grp-ctrls {
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+}
+.grp-ctrls ul li {
+    display: inline-block;
+    border-right: 1px solid #ddd;
+    line-height: 36px;
+    margin: 0;
+    padding: 0;
+}
+
+.grp-ctrls ul li label {
+    margin: 0;
+    padding: 0 6px 0 10px;
+}
+
+.grp-ctrls ul li select {
+    margin: 0;
+  
+    padding: 8px 10px;
+    color: #999;
+    border: 0;
+    border: none;
+    outline: none;
+}

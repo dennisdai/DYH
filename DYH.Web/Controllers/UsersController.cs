@@ -375,29 +375,37 @@ namespace DYH.Web.Controllers
         private List<UserRoleEntry> SetUserRoles(FormCollection collection, int userId)
         {
             var roles = _cache.Get(Constants.CACHE_KEY_ROLES, () => _role.GetList());
-            var list = new List<UserRoleEntry>();
 
-            foreach (var item in roles)
-            {
-                var chkName = "Role_" + item.RoleId;
-                var chkVal = collection[chkName];
-                var userRoleIdKey = "UserRole_" + item.RoleId;
+            //foreach (var item in roles)
+            //{
+            //    var chkName = "Role_" + item.RoleId;
+            //    var chkVal = collection[chkName];
+            //    var userRoleIdKey = "UserRole_" + item.RoleId;
 
-                string userRoleIdValue = collection[userRoleIdKey];
-                var userRoleId = string.IsNullOrEmpty(userRoleIdValue) ? 0 : DataCast.Get<int>(userRoleIdValue);
+            //    string userRoleIdValue = collection[userRoleIdKey];
+            //    var userRoleId = string.IsNullOrEmpty(userRoleIdValue) ? 0 : DataCast.Get<int>(userRoleIdValue);
 
-                var model = new UserRoleEntry()
+            //    var model = new UserRoleEntry()
+            //    {
+            //        RoleId = item.RoleId,
+            //        UserId = userId,
+            //        UserRoleId = userRoleId,
+            //        Status = chkVal == "on"
+            //    };
+
+            //    list.Add(model);
+            //}
+
+            return (from item in roles
+                let chkName = "Role_" + item.RoleId
+                let chkVal = collection[chkName]
+                let userRoleIdKey = "UserRole_" + item.RoleId
+                let userRoleIdValue = collection[userRoleIdKey]
+                let userRoleId =(string.IsNullOrEmpty(userRoleIdValue) ? 0 : DataCast.Get<int>(userRoleIdValue))
+                select new UserRoleEntry()
                 {
-                    RoleId = item.RoleId,
-                    UserId = userId,
-                    UserRoleId = userRoleId,
-                    Status = chkVal == "on"
-                };
-
-                list.Add(model);
-            }
-
-            return list;
+                    RoleId = item.RoleId, UserId = userId, UserRoleId = userRoleId, Status = chkVal == "on"
+                }).ToList();
         }
 
 

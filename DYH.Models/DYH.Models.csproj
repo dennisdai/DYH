@@ -55,6 +55,7 @@
     <Compile Include="ResultCodes.cs" />
     <Compile Include="ResultEntry.cs" />
     <Compile Include="RoleEntry.cs" />
+    <Compile Include="RoleRightEntry.cs" />
     <Compile Include="UserEntry.cs" />
     <Compile Include="UserRoleEntry.cs" />
     <Compile Include="ViewModel\LoginModel.cs" />

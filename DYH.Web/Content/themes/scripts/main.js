@@ -44,7 +44,7 @@ $(function () {
         console.log(width + " " + data);
         if (width < 534) {
             $("#main-container").css({ left: "0" });
-        } else if (width < 764 && data === "true") {
+        } else if (width > 534 && data === "true") {
             $("#main-container").css({ left: "50px" });
         } else if (data === "false" || data == undefined) {
             $("#main-container").css({ left: "220px" });

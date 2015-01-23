@@ -1,0 +1,111 @@
+﻿@model IEnumerable<ActionModuleEntry>
+
+@{
+    ViewBag.Title = "Role's Rights";
+    var module = ViewBag.Module as ModuleEntry ?? new ModuleEntry();
+    var currentId = ViewBag.CurrentId ?? 0;
+}
+
+@helper SubMenuItem(ModuleEntry model)
+{
+    if (model.Children.Count > 0)
+    {
+        var currentId = ViewBag.CurrentId ?? 0;
+        <ul class="cascade-children">
+            @foreach (var item in model.Children)
+            {
+                string clsName = string.Empty;
+                if (item.ModuleId == currentId && item.IsActived)
+                {
+                    clsName = "current";
+                }
+                else if (item.IsActived)
+                {
+                    clsName = "active";
+                }
+                <li class="@clsName">
+                    <div class="cascade-item-box">
+                        <a href="~/RoleRights/Index/@item.ModuleId">
+                            @item.DisplayName
+                            @if (item.Children.Count > 0)
+                            {
+                                string spread = string.Empty;
+                                if (!string.IsNullOrEmpty(clsName))
+                                {
+                                    spread = "icon-spread";
+                                }
+                                <i class="icon-play icon-has-ul @spread"></i>
+                            }
+                        </a>
+                    </div>
+                    @SubMenuItem(item)
+                </li>
+            }
+        </ul>
+    }
+}
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <div class="breadcrumb">
+        <a href="#">Setup</a>
+        <a href="~/RoleRights/Index" class="active">Role's Rights</a>
+    </div>
+</div>
+
+<section id="container">
+    <div class="col-xs-12 col-reset-padding">
+        <div class="cascade-box col-xs-3 col-reset-padding">
+            <p class="title gray-bg-1">
+                <a href="#">Module / Menu</a>
+            </p>
+            <ul>
+                @foreach (var item in module.Children)
+                {
+                    string clsName = string.Empty;
+                    if (item.ModuleId == currentId && item.IsActived)
+                    {
+                        clsName = "current";
+                    }
+                    else if (item.IsActived)
+                    {
+                        clsName = "active";
+                    }
+                    <li class="@clsName">
+                        <div class="cascade-item-box">
+                            <a href="~/RoleRights/Index/@item.ModuleId">
+                                @item.DisplayName
+                                @if (item.Children.Count > 0)
+                                {
+                                    string spread = string.Empty;
+                                    if (!string.IsNullOrEmpty(clsName))
+                                    {
+                                        spread = "icon-spread";
+                                    }
+                                    <i class="icon-play icon-has-ul @spread"></i>
+                                }
+                            </a>
+                        </div>
+                        @SubMenuItem(item)
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-xs-9 col-reset-padding">
+            <div class="grp-ctrls">
+                <ul>
+                    <li><label>Role Name</label></li>
+                    <li>
+                        <select id="cmbRole" name="RoleID" class="tool-text">
+                            <option value="1">Super User</option>
+                            <option value="5">Administrator</option>
+                            <option value="6">Manager</option>
+                            <option value="7">Counter</option>
+                            <option value="8" selected="">Employee</option>
+                        </select>
+                    </li>
+                    <li><a id="btnSave" href="#"><i class="icon-save"></i><span>Save</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

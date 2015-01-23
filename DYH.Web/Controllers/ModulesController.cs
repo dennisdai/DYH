@@ -33,7 +33,7 @@ namespace DYH.Web.Controllers
             ViewBag.CurrentId = id;
 
             var list = _cache.Get(Constants.CACHE_KEY_MODULES, () => _module.GetList());
-            var model = GetTree(list, id);
+            var model = TreeUtils.GetTree(list, id);
 
             return View(model);
         }
@@ -43,54 +43,11 @@ namespace DYH.Web.Controllers
         {
             var id = DataCast.Get<int>(ViewBag.CurrentMenuID);
             var list = _cache.Get(Constants.CACHE_KEY_MODULES, () => _module.GetList());
-            var model = GetTree(list, id);
+            var model = TreeUtils.GetTree(list, id);
 
             return View(model);
         }
-
-        public static ModuleEntry GetTree(IEnumerable<ModuleEntry> list, int currentId)
-        {
-            var root = new ModuleEntry
-            {
-                ModuleCode = "Root",
-                DisplayName = "Root",
-                SeqNo = 1,
-                ParentId = 0,
-                ModuleId = 0
-            };
-
-            return GetSubItem(list, root, currentId);
-        }
-
-        private static ModuleEntry GetSubItem(IEnumerable<ModuleEntry> source, ModuleEntry parentNode, int currentId)
-        {
-            if (source == null || parentNode == null)
-            {
-                return null;
-            }
-            var list = source.Where(x => x.ParentId == parentNode.ModuleId).OrderBy(x => x.SeqNo);
-
-            foreach (var item in list)
-            {
-                var child = Utils.Dereference(item);
-                if (child.ModuleId == currentId)
-                {
-                    child.IsActived = true;
-                }
-                else
-                {
-                    child.IsActived = false;
-                }
-
-                parentNode.Children.Add(GetSubItem(source, child, currentId));
-                if (child.Children.Any(x => x.IsActived))
-                {
-                    child.IsActived = true;
-                }
-            }
-
-            return parentNode;
-        }
+       
 
         public ActionResult Create(int id = 0)
         {
