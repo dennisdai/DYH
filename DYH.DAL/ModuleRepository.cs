@@ -29,7 +29,7 @@ namespace DYH.DAL
 
         public IEnumerable<ModuleEntry> GetList()
         {
-            return _provider.Database.Query<ModuleEntry>("");
+            return _provider.Database.Query<ModuleEntry>("").ToList();
         }
 
         public int Add(ModuleEntry entry)

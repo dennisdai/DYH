@@ -1218,7 +1218,7 @@ a:focus, button:focus {
     overflow: hidden;
     margin: 0 0 10px 0;
     padding-right: 10px;
-    border-top: 1px solid #ccc;
+    
 }
 
     .ul-chk-list li {
@@ -1343,6 +1343,7 @@ a:focus, button:focus {
 ul.cascade-children ul.cascade-children {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    
 }
 
 
@@ -1404,12 +1405,16 @@ ul.cascade-children ul.cascade-children {
 }
 
 .cascade-box p.title {
-    line-height: 36px;
-    height: 36px;
+    line-height: 37px;
+    height: 37px;
     border-bottom: 1px solid #ddd;
     text-align: center;
     margin-bottom: 0;
+     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+.cascade-box p.title a{ display: block; }
 
 .cascade-item-box > a > .icon-has-ul {
     position: absolute;
@@ -1426,8 +1431,9 @@ ul.cascade-children ul.cascade-children {
     overflow: hidden;
     border-bottom: 1px solid #ddd;
 }
+
 .grp-ctrls ul li {
-    display: inline-block;
+    float: left;
     border-right: 1px solid #ddd;
     line-height: 36px;
     margin: 0;
@@ -1441,10 +1447,53 @@ ul.cascade-children ul.cascade-children {
 
 .grp-ctrls ul li select {
     margin: 0;
-  
     padding: 8px 10px;
     color: #999;
     border: 0;
     border: none;
     outline: none;
+}
+
+.grp-ctrls ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 0 8px;
+    line-height: 36px;
+    margin: 0;
+}
+.grp-ctrls ul li a i {
+    font-size: 18px;
+    float: left;
+}
+.grp-ctrls ul li a span {
+    margin-left: 6px;
+
+}
+
+.list>ul {
+    border-bottom: 1px solid #ccc;
+    color: #767676;
+}
+
+
+.list ul.tb-haader>li{
+    line-height: 50px;
+    height: 50px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.list>ul>li {
+    vertical-align: middle;
+}
+
+.cust-thead {
+    font-size: 2em;
+    font-weight: bold;
+}
+.cust-tbody tr td{
+    vertical-align: middle !important;
+}
+.cust-tbody tr:last-child td {
+    border-bottom: 1px solid #ddd;
 }

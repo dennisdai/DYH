@@ -29,7 +29,8 @@ namespace DYH.Models
 
         [Required]
         [DisplayName("Sequence")]
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Please enter a valid number.")]
+        //mono中不能启用
+        //[RegularExpression(@"^[0-9]+$", ErrorMessage = "Please enter a valid number.")]
         [Column("seqno")]
         public int SeqNo { get; set; }
 

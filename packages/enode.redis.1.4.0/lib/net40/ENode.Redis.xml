@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ENode.Redis</name>
+    </assembly>
+    <members>
+        <member name="T:ENode.Redis.ConfigurationExtensions">
+            <summary>ENode configuration class Redis extensions.
+            </summary>
+        </member>
+        <member name="M:ENode.Redis.ConfigurationExtensions.UseRedisMemoryCache(ENode.Configurations.ENodeConfiguration)">
+            <summary>Use Redis to implement the memory cache.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ENode.Redis.ConfigurationExtensions.UseRedisMemoryCache(ENode.Configurations.ENodeConfiguration,System.String,System.Int32)">
+            <summary>Use Redis to implement the memory cache.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ENode.Redis.RedisMemoryCache">
+            <summary>Redis based memory cache implementation.
+            </summary>
+        </member>
+        <member name="M:ENode.Redis.RedisMemoryCache.#ctor(System.String,System.Int32)">
+            <summary>Parameterized constructor.
+            </summary>
+            <param name="host"></param>
+            <param name="port"></param>
+        </member>
+        <member name="M:ENode.Redis.RedisMemoryCache.Get(System.Object,System.Type)">
+            <summary>Get an aggregate from memory cache.
+            </summary>
+            <param name="id"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ENode.Redis.RedisMemoryCache.Get``1(System.Object)">
+            <summary>Get a strong type aggregate from memory cache.
+            </summary>
+            <param name="id"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ENode.Redis.RedisMemoryCache.Set(ENode.Domain.IAggregateRoot)">
+            <summary>Set an aggregate to memory cache.
+            </summary>
+            <param name="aggregateRoot"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+    </members>
+</doc>

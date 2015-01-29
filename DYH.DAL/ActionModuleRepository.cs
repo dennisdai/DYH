@@ -19,7 +19,7 @@ namespace DYH.DAL
 
         public IEnumerable<ActionModuleEntry> GetList()
         {
-            return _provider.Database.Query<ActionModuleEntry>("");
+            return _provider.Database.Query<ActionModuleEntry>("").ToList();
         }
 
         public int Add(ActionModuleEntry entry)
@@ -47,7 +47,7 @@ namespace DYH.DAL
                 tran.Complete();
             }
 
-            if (i == list.Count() - 1)
+            if (i == list.Count())
                 return 1;
 
             return 0;
@@ -68,7 +68,7 @@ namespace DYH.DAL
                 tran.Complete();
             }
 
-            if (i == list.Count() - 1)
+            if (i == list.Count())
                 return 1;
 
             return 0;

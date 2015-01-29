@@ -19,7 +19,7 @@ namespace DYH.DAL
 
         public IEnumerable<ActionEntry> GetList()
         {
-            return _provider.Database.Query<ActionEntry>("");
+            return _provider.Database.Query<ActionEntry>("").ToList();
         }
 
         public ActionEntry GetById(int id)

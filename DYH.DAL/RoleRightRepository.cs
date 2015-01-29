@@ -18,7 +18,7 @@ namespace DYH.DAL
 
         public IEnumerable<RoleRightEntry> GetList(int roleId)
         {
-            return _provider.Database.Query<RoleRightEntry>("WHERE roleid = @0", roleId);
+            return _provider.Database.Query<RoleRightEntry>("WHERE roleid = @0", roleId).ToList();
         }
 
         public RoleRightEntry GetById(int roleRightId)
@@ -46,7 +46,7 @@ namespace DYH.DAL
                 tran.Complete();
             }
 
-            if (i == list.Count() - 1)
+            if (i == list.Count())
                 return 1;
 
             return 0;
@@ -72,7 +72,7 @@ namespace DYH.DAL
                 tran.Complete();
             }
 
-            if (i == list.Count() - 1)
+            if (i == list.Count())
                 return 1;
 
             return 0;

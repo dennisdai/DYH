@@ -18,7 +18,7 @@ namespace DYH.DAL
 
         public IEnumerable<UserRoleEntry> GetList()
         {
-            return _provider.Database.Query<UserRoleEntry>("");
+            return _provider.Database.Query<UserRoleEntry>("").ToList();
         }
 
         public int Add(UserRoleEntry entry)
@@ -41,7 +41,7 @@ namespace DYH.DAL
                 tran.Complete();
             }
 
-            if (i == list.Count() - 1)
+            if (i == list.Count())
                 return 1;
 
             return 0;
@@ -67,7 +67,7 @@ namespace DYH.DAL
                 tran.Complete();
             }
 
-            if (i == list.Count() - 1)
+            if (i == list.Count())
                 return 1;
 
             return 0;

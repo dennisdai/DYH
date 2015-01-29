@@ -65,7 +65,9 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
@@ -81,7 +83,7 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <Private>False</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -248,12 +250,10 @@
     <Content Include="Content\themes\styles\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\themes\styles\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\themes\styles\fonts\FontAwesome.otf" />
-    <Content Include="Content\themes\styles\fonts\vssver2.scc" />
     <Content Include="Content\themes\plugins\powertip\jquery.powertip.min.js.map">
       <DependentUpon>jquery.powertip.min.js</DependentUpon>
     </Content>
-    <Content Include="Content\themes\plugins\fancybox\helpers\vssver2.scc" />
-    <Content Include="Content\themes\plugins\fancybox\vssver2.scc" />
+    <None Include="Properties\PublishProfiles\DYH.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -303,7 +303,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DYH.Core\DYH.Core.csproj">

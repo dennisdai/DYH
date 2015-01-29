@@ -1,0 +1,1853 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ECommon</name>
+    </assembly>
+    <members>
+        <member name="P:ECommon.Configurations.Configuration.Setting">
+            <summary>Get the configuration setting information.
+            </summary>
+        </member>
+        <member name="P:ECommon.Configurations.Configuration.Instance">
+            <summary>Provides the singleton access instance.
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.SqlMapper">
+            <summary>
+            Dapper, a light weight object mapper for ADO.NET
+            </summary>
+            <summary>Dapper extensions.
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.PurgeQueryCache">
+            <summary>
+            Purge the query cache 
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GetCachedSQLCount">
+            <summary>
+            Return a count of all the cached queries by dapper
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GetCachedSQL(System.Int32)">
+            <summary>
+            Return a list of all the queries cached by dapper
+            </summary>
+            <param name="ignoreHitCountAbove"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GetHashCollissions">
+            <summary>
+            Deep diagnostics only: find any hash collisions in the cache
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Execute(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Execute parameterized SQL  
+            </summary>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Query(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Return a list of dynamic objects, reader is closed after the call
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Query``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Executes a query, returning the data typed as per T
+            </summary>
+            <remarks>the dynamic param may seem a bit odd, but this works around a major usability issue in vs, if it is Object vs completion gets annoying. Eg type new [space] get new object</remarks>
+            <returns>A sequence of data of the supplied type; if a basic type (int, string, etc) is queried then the data from the first column in assumed, otherwise an instance is
+            created per row, and a direct column-name===member-name mapping is assumed (case insensitive).
+            </returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.QueryMultiple(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Execute a command that returns multiple result sets, and access each in turn
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.QueryInternal``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Return a typed list of objects, reader is closed after the call
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Query``3(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Maps a query to objects
+            </summary>
+            <typeparam name="TFirst">The first type in the recordset</typeparam>
+            <typeparam name="TSecond">The second type in the recordset</typeparam>
+            <typeparam name="TReturn">The return type</typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn">The Field we should split and read the second object from (default: id)</param>
+            <param name="commandTimeout">Number of seconds before command execution timeout</param>
+            <param name="commandType">Is it a stored proc or a batch?</param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Query``4(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Maps a query to objects
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn">The Field we should split and read the second object from (default: id)</param>
+            <param name="commandTimeout">Number of seconds before command execution timeout</param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Query``5(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3,``4},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Perform a multi mapping query with 4 input parameters
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TFourth"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Query``6(System.Data.IDbConnection,System.String,System.Func{``0,``1,``2,``3,``4,``5},System.Object,System.Data.IDbTransaction,System.Boolean,System.String,System.Nullable{System.Int32},System.Nullable{System.Data.CommandType})">
+            <summary>
+            Perform a multi mapping query with 5 input parameters
+            </summary>
+            <typeparam name="TFirst"></typeparam>
+            <typeparam name="TSecond"></typeparam>
+            <typeparam name="TThird"></typeparam>
+            <typeparam name="TFourth"></typeparam>
+            <typeparam name="TFifth"></typeparam>
+            <typeparam name="TReturn"></typeparam>
+            <param name="cnn"></param>
+            <param name="sql"></param>
+            <param name="map"></param>
+            <param name="param"></param>
+            <param name="transaction"></param>
+            <param name="buffered"></param>
+            <param name="splitOn"></param>
+            <param name="commandTimeout"></param>
+            <param name="commandType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.ReadChar(System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.ReadNullableChar(System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.FindOrAddParameter(System.Data.IDataParameterCollection,System.Data.IDbCommand,System.String)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.PackListParameters(System.Data.IDbCommand,System.String,System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.CreateParamInfoGenerator(ECommon.Dapper.SqlMapper.Identity,System.Boolean)">
+            <summary>
+            Internal use only
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GetTypeMap(System.Type)">
+            <summary>
+            Gets type-map for the given type
+            </summary>
+            <returns>Type map implementation, DefaultTypeMap instance if no override present</returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.SetTypeMap(System.Type,ECommon.Dapper.SqlMapper.ITypeMap)">
+            <summary>
+            Set custom mapping for type deserializers
+            </summary>
+            <param name="type">Entity type to override</param>
+            <param name="map">Mapping rules impementation, null to remove custom map</param>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GetTypeDeserializer(System.Type,System.Data.IDataReader,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Internal use only
+            </summary>
+            <param name="type"></param>
+            <param name="reader"></param>
+            <param name="startBound"></param>
+            <param name="length"></param>
+            <param name="returnNullIfFirstMissing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.ThrowDataException(System.Exception,System.Int32,System.Data.IDataReader)">
+            <summary>
+            Throws a data exception, only used internally
+            </summary>
+            <param name="ex"></param>
+            <param name="index"></param>
+            <param name="reader"></param>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Insert(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Insert data into table.
+            </summary>
+            <param name="connection"></param>
+            <param name="data"></param>
+            <param name="table"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Update(System.Data.IDbConnection,System.Object,System.Object,System.String,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Updata data for table with a specified condition.
+            </summary>
+            <param name="connection"></param>
+            <param name="data"></param>
+            <param name="condition"></param>
+            <param name="table"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Delete(System.Data.IDbConnection,System.Object,System.String,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Delete data from table with a specified condition.
+            </summary>
+            <param name="connection"></param>
+            <param name="condition"></param>
+            <param name="table"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GetCount(System.Data.IDbConnection,System.Object,System.String,System.Boolean,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Get data count from table with a specified condition.
+            </summary>
+            <param name="connection"></param>
+            <param name="condition"></param>
+            <param name="table"></param>
+            <param name="isOr"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.QueryList(System.Data.IDbConnection,System.Object,System.String,System.String,System.Boolean,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Query a list of data from table with a specified condition.
+            </summary>
+            <param name="connection"></param>
+            <param name="condition"></param>
+            <param name="table"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.QueryList``1(System.Data.IDbConnection,System.Object,System.String,System.String,System.Boolean,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Query a list of data from table with specified condition.
+            </summary>
+            <param name="connection"></param>
+            <param name="condition"></param>
+            <param name="table"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.QueryPaged(System.Data.IDbConnection,System.Object,System.String,System.String,System.Int32,System.Int32,System.String,System.Boolean,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Query paged data from a single table.
+            </summary>
+            <param name="connection"></param>
+            <param name="condition"></param>
+            <param name="table"></param>
+            <param name="columns"></param>
+            <param name="orderBy"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.QueryPaged``1(System.Data.IDbConnection,System.Object,System.String,System.String,System.Int32,System.Int32,System.String,System.Boolean,System.Data.IDbTransaction,System.Nullable{System.Int32})">
+            <summary>Query paged data from a single table.
+            </summary>
+            <param name="connection"></param>
+            <param name="condition"></param>
+            <param name="table"></param>
+            <param name="columns"></param>
+            <param name="orderBy"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="transaction"></param>
+            <param name="commandTimeout"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="E:ECommon.Dapper.SqlMapper.QueryCachePurged">
+            <summary>
+            Called if the query cache is purged via PurgeQueryCache
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.SqlMapper.IDynamicParameters">
+            <summary>
+            Implement this interface to pass an arbitrary db specific set of parameters to Dapper
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.IDynamicParameters.AddParameters(System.Data.IDbCommand,ECommon.Dapper.SqlMapper.Identity)">
+            <summary>
+            Add all the parameters needed to the command just before it executes
+            </summary>
+            <param name="command">The raw command prior to execution</param>
+            <param name="identity">Information about the query</param>
+        </member>
+        <member name="T:ECommon.Dapper.SqlMapper.ITypeMap">
+            <summary>
+            Implement this interface to change default mapping of reader columns to type memebers
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.ITypeMap.FindConstructor(System.String[],System.Type[])">
+            <summary>
+            Finds best constructor
+            </summary>
+            <param name="names">DataReader column names</param>
+            <param name="types">DataReader column types</param>
+            <returns>Matching constructor or default one</returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.ITypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
+            <summary>
+            Gets mapping for constructor parameter
+            </summary>
+            <param name="constructor">Constructor to resolve</param>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.ITypeMap.GetMember(System.String)">
+            <summary>
+            Gets member mapping for column
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="T:ECommon.Dapper.SqlMapper.IMemberMap">
+            <summary>
+            Implements this interface to provide custom member mapping
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SqlMapper.IMemberMap.ColumnName">
+            <summary>
+            Source DataReader column name
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SqlMapper.IMemberMap.MemberType">
+            <summary>
+             Target member type
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SqlMapper.IMemberMap.Property">
+            <summary>
+            Target property
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SqlMapper.IMemberMap.Field">
+            <summary>
+            Target field
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SqlMapper.IMemberMap.Parameter">
+            <summary>
+            Target constructor parameter
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.SqlMapper.Link`2">
+            <summary>
+            This is a micro-cache; suitable when the number of terms is controllable (a few hundred, for example),
+            and strictly append-only; you cannot change existing values. All key matches are on **REFERENCE**
+            equality. The type is fully thread-safe.
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.SqlMapper.Identity">
+            <summary>
+            Identity of a cached query in Dapper, used for extensability
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Identity.ForDynamicParameters(System.Type)">
+            <summary>
+            Create an identity for use with DynamicParameters, internal use only
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Identity.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ECommon.Dapper.SqlMapper.Identity.sql">
+            <summary>
+            The sql
+            </summary>
+        </member>
+        <member name="F:ECommon.Dapper.SqlMapper.Identity.commandType">
+            <summary>
+            The command type 
+            </summary>
+        </member>
+        <member name="F:ECommon.Dapper.SqlMapper.Identity.hashCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ECommon.Dapper.SqlMapper.Identity.gridIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ECommon.Dapper.SqlMapper.Identity.type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ECommon.Dapper.SqlMapper.Identity.connectionString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ECommon.Dapper.SqlMapper.Identity.parametersType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Identity.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.Identity.Equals(ECommon.Dapper.SqlMapper.Identity)">
+            <summary>
+            Compare 2 Identity objects
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ECommon.Dapper.SqlMapper.GridReader">
+            <summary>
+            The grid reader provides interfaces for reading multiple result sets from a Dapper query 
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GridReader.Read(System.Boolean)">
+            <summary>
+            Read the next grid of results, returned as a dynamic object
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GridReader.Read``1(System.Boolean)">
+            <summary>
+            Read the next grid of results
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GridReader.Read``3(System.Func{``0,``1,``2},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single recordset on the grid
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GridReader.Read``4(System.Func{``0,``1,``2,``3},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single recordset on the grid
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GridReader.Read``5(System.Func{``0,``1,``2,``3,``4},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GridReader.Read``6(System.Func{``0,``1,``2,``3,``4,``5},System.String,System.Boolean)">
+            <summary>
+            Read multiple objects from a single record set on the grid
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SqlMapper.GridReader.Dispose">
+            <summary>
+            Dispose the grid, closing and disposing both the underlying reader and command.
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.DynamicParameters">
+            <summary>
+            A bag of parameters that can be passed to the Dapper Query and Execute methods
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.DynamicParameters.#ctor">
+            <summary>
+            construct a dynamic parameter bag
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.DynamicParameters.#ctor(System.Object)">
+            <summary>
+            construct a dynamic parameter bag
+            </summary>
+            <param name="template">can be an anonymous type or a DynamicParameters bag</param>
+        </member>
+        <member name="M:ECommon.Dapper.DynamicParameters.AddDynamicParams(System.Object)">
+            <summary>
+            Append a whole object full of params to the dynamic
+            EG: AddDynamicParams(new {A = 1, B = 2}) // will add property A and B to the dynamic
+            </summary>
+            <param name="param"></param>
+        </member>
+        <member name="M:ECommon.Dapper.DynamicParameters.Add(System.String,System.Object,System.Nullable{System.Data.DbType},System.Nullable{System.Data.ParameterDirection},System.Nullable{System.Int32})">
+            <summary>
+            Add a parameter to this dynamic parameter list
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="dbType"></param>
+            <param name="direction"></param>
+            <param name="size"></param>
+        </member>
+        <member name="M:ECommon.Dapper.DynamicParameters.AddParameters(System.Data.IDbCommand,ECommon.Dapper.SqlMapper.Identity)">
+            <summary>
+            Add all the parameters needed to the command just before it executes
+            </summary>
+            <param name="command">The raw command prior to execution</param>
+            <param name="identity">Information about the query</param>
+        </member>
+        <member name="M:ECommon.Dapper.DynamicParameters.Get``1(System.String)">
+            <summary>
+            Get the value of a parameter
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name"></param>
+            <returns>The value, note DBNull.Value is not returned, instead the value is returned as null</returns>
+        </member>
+        <member name="P:ECommon.Dapper.DynamicParameters.ParameterNames">
+            <summary>
+            All the names of the param in the bag, use Get to yank them out
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.DbString">
+            <summary>
+            This class represents a SQL string, it can be used if you need to denote your parameter is a Char vs VarChar vs nVarChar vs nChar
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.DbString.#ctor">
+            <summary>
+            Create a new DbString
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.DbString.AddParameter(System.Data.IDbCommand,System.String)">
+            <summary>
+            Add the parameter to the command... internal use only
+            </summary>
+            <param name="command"></param>
+            <param name="name"></param>
+        </member>
+        <member name="P:ECommon.Dapper.DbString.IsAnsi">
+            <summary>
+            Ansi vs Unicode 
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.DbString.IsFixedLength">
+            <summary>
+            Fixed length 
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.DbString.Length">
+            <summary>
+            Length of the string -1 for max
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.DbString.Value">
+            <summary>
+            The value of the string
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.FeatureSupport">
+            <summary>
+            Handles variances in features per DBMS
+            </summary>
+        </member>
+        <member name="F:ECommon.Dapper.FeatureSupport.FeatureList">
+            <summary>
+            Dictionary of supported features index by connection type name
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.FeatureSupport.Get(System.Data.IDbConnection)">
+            <summary>
+            Gets the featureset based on the passed connection
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.FeatureSupport.Arrays">
+            <summary>
+            True if the db supports array columns e.g. Postgresql
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.SimpleMemberMap">
+            <summary>
+            Represents simple memeber map for one of target parameter or property or field to source DataReader column
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.SimpleMemberMap.#ctor(System.String,System.Reflection.PropertyInfo)">
+            <summary>
+            Creates instance for simple property mapping
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <param name="property">Target property</param>
+        </member>
+        <member name="M:ECommon.Dapper.SimpleMemberMap.#ctor(System.String,System.Reflection.FieldInfo)">
+            <summary>
+            Creates instance for simple field mapping
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <param name="field">Target property</param>
+        </member>
+        <member name="M:ECommon.Dapper.SimpleMemberMap.#ctor(System.String,System.Reflection.ParameterInfo)">
+            <summary>
+            Creates instance for simple constructor parameter mapping
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <param name="parameter">Target constructor parameter</param>
+        </member>
+        <member name="P:ECommon.Dapper.SimpleMemberMap.ColumnName">
+            <summary>
+            DataReader column name
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SimpleMemberMap.MemberType">
+            <summary>
+            Target member type
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SimpleMemberMap.Property">
+            <summary>
+            Target property
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SimpleMemberMap.Field">
+            <summary>
+            Target field
+            </summary>
+        </member>
+        <member name="P:ECommon.Dapper.SimpleMemberMap.Parameter">
+            <summary>
+            Target constructor parameter
+            </summary>
+        </member>
+        <member name="T:ECommon.Dapper.DefaultTypeMap">
+            <summary>
+            Represents default type mapping strategy used by Dapper
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.DefaultTypeMap.#ctor(System.Type)">
+            <summary>
+            Creates default type map
+            </summary>
+            <param name="type">Entity type</param>
+        </member>
+        <member name="M:ECommon.Dapper.DefaultTypeMap.FindConstructor(System.String[],System.Type[])">
+            <summary>
+            Finds best constructor
+            </summary>
+            <param name="names">DataReader column names</param>
+            <param name="types">DataReader column types</param>
+            <returns>Matching constructor or default one</returns>
+        </member>
+        <member name="M:ECommon.Dapper.DefaultTypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
+            <summary>
+            Gets mapping for constructor parameter
+            </summary>
+            <param name="constructor">Constructor to resolve</param>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="M:ECommon.Dapper.DefaultTypeMap.GetMember(System.String)">
+            <summary>
+            Gets member mapping for column
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <returns>Mapping implementation</returns>
+        </member>
+        <member name="T:ECommon.Dapper.CustomPropertyTypeMap">
+            <summary>
+            Implements custom property mapping by user provided criteria (usually presence of some custom attribute with column to member mapping)
+            </summary>
+        </member>
+        <member name="M:ECommon.Dapper.CustomPropertyTypeMap.#ctor(System.Type,System.Func{System.Type,System.String,System.Reflection.PropertyInfo})">
+            <summary>
+            Creates custom property mapping
+            </summary>
+            <param name="type">Target entity type</param>
+            <param name="propertySelector">Property selector based on target type and DataReader column name</param>
+        </member>
+        <member name="M:ECommon.Dapper.CustomPropertyTypeMap.FindConstructor(System.String[],System.Type[])">
+            <summary>
+            Always returns default constructor
+            </summary>
+            <param name="names">DataReader column names</param>
+            <param name="types">DataReader column types</param>
+            <returns>Default constructor</returns>
+        </member>
+        <member name="M:ECommon.Dapper.CustomPropertyTypeMap.GetConstructorParameter(System.Reflection.ConstructorInfo,System.String)">
+            <summary>
+            Not impelmeneted as far as default constructor used for all cases
+            </summary>
+            <param name="constructor"></param>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Dapper.CustomPropertyTypeMap.GetMember(System.String)">
+            <summary>
+            Returns property based on selector strategy
+            </summary>
+            <param name="columnName">DataReader column name</param>
+            <returns>Poperty member map</returns>
+        </member>
+        <member name="T:ECommon.Logging.EmptyLogger">
+            <summary>An empty logger which log nothing.
+            </summary>
+        </member>
+        <member name="T:ECommon.Logging.ILogger">
+            <summary>Represents a logger interface.
+            </summary>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Debug(System.Object)">
+            <summary>Write a debug level log message.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.DebugFormat(System.String,System.Object[])">
+            <summary>Write a debug level log message.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Debug(System.Object,System.Exception)">
+            <summary>Write a debug level log message.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Info(System.Object)">
+            <summary>Write a info level log message.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.InfoFormat(System.String,System.Object[])">
+            <summary>Write a info level log message.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Info(System.Object,System.Exception)">
+            <summary>Write a info level log message.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Error(System.Object)">
+            <summary>Write an error level log message.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.ErrorFormat(System.String,System.Object[])">
+            <summary>Write an error level log message.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Error(System.Object,System.Exception)">
+            <summary>Write an error level log message.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Warn(System.Object)">
+            <summary>Write a warnning level log message.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.WarnFormat(System.String,System.Object[])">
+            <summary>Write a warnning level log message.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Warn(System.Object,System.Exception)">
+            <summary>Write a warnning level log message.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Fatal(System.Object)">
+            <summary>Write a fatal level log message.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.FatalFormat(System.String,System.Object[])">
+            <summary>Write a fatal level log message.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.ILogger.Fatal(System.Object,System.Exception)">
+            <summary>Write a fatal level log message.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Debug(System.Object)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.DebugFormat(System.String,System.Object[])">
+            <summary>Do nothing.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Debug(System.Object,System.Exception)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Info(System.Object)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.InfoFormat(System.String,System.Object[])">
+            <summary>Do nothing.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Info(System.Object,System.Exception)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Error(System.Object)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.ErrorFormat(System.String,System.Object[])">
+            <summary>Do nothing.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Error(System.Object,System.Exception)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Warn(System.Object)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.WarnFormat(System.String,System.Object[])">
+            <summary>Do nothing.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Warn(System.Object,System.Exception)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Fatal(System.Object)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.FatalFormat(System.String,System.Object[])">
+            <summary>Do nothing.
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLogger.Fatal(System.Object,System.Exception)">
+            <summary>Do nothing.
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="P:ECommon.Logging.EmptyLogger.IsDebugEnabled">
+            <summary>Returns false.
+            </summary>
+        </member>
+        <member name="T:ECommon.Logging.EmptyLoggerFactory">
+            <summary>An empty implementation of ILoggerFactory.
+            </summary>
+        </member>
+        <member name="T:ECommon.Logging.ILoggerFactory">
+            <summary>Represents a logger factory.
+            </summary>
+        </member>
+        <member name="M:ECommon.Logging.ILoggerFactory.Create(System.String)">
+            <summary>Create a logger with the given logger name.
+            </summary>
+        </member>
+        <member name="M:ECommon.Logging.ILoggerFactory.Create(System.Type)">
+            <summary>Create a logger with the given type.
+            </summary>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLoggerFactory.Create(System.String)">
+            <summary>Create an empty logger instance by name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Logging.EmptyLoggerFactory.Create(System.Type)">
+            <summary>Create an empty logger instance by type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler._currentThreadIsProcessingItems">
+            <summary>Whether the current thread is processing work items.</summary>
+        </member>
+        <member name="F:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler._tasks">
+            <summary>The list of tasks to be executed.</summary>
+        </member>
+        <member name="F:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler._maxDegreeOfParallelism">
+            <summary>The maximum concurrency level allowed by this scheduler.</summary>
+        </member>
+        <member name="F:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler._delegatesQueuedOrRunning">
+            <summary>Whether the scheduler is currently processing work items.</summary>
+        </member>
+        <member name="M:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler.#ctor(System.Int32)">
+            <summary>
+            Initializes an instance of the LimitedConcurrencyLevelTaskScheduler class with the
+            specified degree of parallelism.
+            </summary>
+            <param name="maxDegreeOfParallelism">The maximum degree of parallelism provided by this scheduler.</param>
+        </member>
+        <member name="M:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler.QueueTask(System.Threading.Tasks.Task)">
+            <summary>Queues a task to the scheduler.</summary>
+            <param name="task">The task to be queued.</param>
+        </member>
+        <member name="M:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler.NotifyThreadPoolOfPendingWork">
+            <summary>
+            Informs the ThreadPool that there's work to be executed for this scheduler.
+            </summary>
+        </member>
+        <member name="M:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler.TryExecuteTaskInline(System.Threading.Tasks.Task,System.Boolean)">
+            <summary>Attempts to execute the specified task on the current thread.</summary>
+            <param name="task">The task to be executed.</param>
+            <param name="taskWasPreviouslyQueued"></param>
+            <returns>Whether the task could be executed on the current thread.</returns>
+        </member>
+        <member name="M:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler.TryDequeue(System.Threading.Tasks.Task)">
+            <summary>Attempts to remove a previously scheduled task from the scheduler.</summary>
+            <param name="task">The task to be removed.</param>
+            <returns>Whether the task could be found and removed.</returns>
+        </member>
+        <member name="M:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler.GetScheduledTasks">
+            <summary>Gets an enumerable of the tasks currently scheduled on this scheduler.</summary>
+            <returns>An enumerable of the tasks currently scheduled.</returns>
+        </member>
+        <member name="P:ECommon.Scheduling.LimitedConcurrencyLevelTaskScheduler.MaximumConcurrencyLevel">
+            <summary>Gets the maximum concurrency level supported by this scheduler.</summary>
+        </member>
+        <member name="T:ECommon.Retring.ActionInfo">
+            <summary>A class contains the information of an action.
+            </summary>
+        </member>
+        <member name="M:ECommon.Retring.ActionInfo.#ctor(System.String,System.Func{System.Object,System.Boolean},System.Object,ECommon.Retring.ActionInfo)">
+            <summary>Parameterized constructor.
+            </summary>
+            <param name="name"></param>
+            <param name="action"></param>
+            <param name="data"></param>
+            <param name="next"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:ECommon.Retring.ActionInfo.Name">
+            <summary>The name of the action.
+            </summary>
+        </member>
+        <member name="P:ECommon.Retring.ActionInfo.Action">
+            <summary>The action delegate.
+            </summary>
+        </member>
+        <member name="P:ECommon.Retring.ActionInfo.Data">
+            <summary>The parameter data of the action.
+            </summary>
+        </member>
+        <member name="P:ECommon.Retring.ActionInfo.Next">
+            <summary>The next action of the current action. If the current action complete success, then the next action will be called.
+            </summary>
+        </member>
+        <member name="T:ECommon.Retring.ActionExecutionService">
+            <summary>The default implementation of IActionExecutionService.
+            </summary>
+        </member>
+        <member name="T:ECommon.Retring.IActionExecutionService">
+            <summary>Defines a service interface to execute action.
+            </summary>
+        </member>
+        <member name="M:ECommon.Retring.IActionExecutionService.TryAction(System.String,System.Func{System.Boolean},System.Int32,ECommon.Retring.ActionInfo)">
+            <summary>Try to execute the given action with the given max retry count.
+            <remarks>If the action execute still failed when reached to the max retry count, then put the action into the retry queue.
+            </remarks>
+            </summary>
+            <param name="actionName"></param>
+            <param name="action"></param>
+            <param name="maxRetryCount"></param>
+            <param name="nextAction"></param>
+        </member>
+        <member name="M:ECommon.Retring.IActionExecutionService.TryRecursively(System.String,System.Func{System.Boolean},System.Int32)">
+            <summary>Try to execute the given action with the given max retry count. If success then returns true; otherwise, returns false.
+            </summary>
+            <param name="actionName"></param>
+            <param name="action"></param>
+            <param name="maxRetryCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Retring.ActionExecutionService.#ctor(ECommon.Logging.ILoggerFactory)">
+            <summary>Parameterized constructor.
+            </summary>
+            <param name="loggerFactory"></param>
+        </member>
+        <member name="M:ECommon.Retring.ActionExecutionService.TryAction(System.String,System.Func{System.Boolean},System.Int32,ECommon.Retring.ActionInfo)">
+            <summary>Try to execute the given action with the given max retry count.
+            <remarks>If the action execute still failed when reached to the max retry count, then put the action into the retry queue.
+            </remarks>
+            </summary>
+            <param name="actionName"></param>
+            <param name="action"></param>
+            <param name="maxRetryCount"></param>
+            <param name="nextAction"></param>
+        </member>
+        <member name="M:ECommon.Retring.ActionExecutionService.TryRecursively(System.String,System.Func{System.Boolean},System.Int32)">
+            <summary>Try to execute the given action with the given max retry count. If success then returns true; otherwise, returns false.
+            </summary>
+            <param name="actionName"></param>
+            <param name="action"></param>
+            <param name="maxRetryCount"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ECommon.Serializing.DefaultBinarySerializer">
+            <summary>Defines a serializer to serialize object to byte array.
+            </summary>
+        </member>
+        <member name="M:ECommon.Serializing.DefaultBinarySerializer.Serialize(System.Object)">
+            <summary>Serialize an object to byte array.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Serializing.DefaultBinarySerializer.Deserialize(System.Byte[],System.Type)">
+            <summary>Deserialize an object from a byte array.
+            </summary>
+            <param name="data"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Serializing.DefaultBinarySerializer.Deserialize``1(System.Byte[])">
+            <summary>Deserialize a typed object from a byte array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ECommon.Components.ComponentAttribute">
+            <summary>An attribute to indicate a class is a component.
+            </summary>
+        </member>
+        <member name="M:ECommon.Components.ComponentAttribute.#ctor">
+            <summary>Default constructor.
+            </summary>
+        </member>
+        <member name="M:ECommon.Components.ComponentAttribute.#ctor(ECommon.Components.LifeStyle)">
+            <summary>Parameterized constructor.
+            </summary>
+            <param name="lifeStyle"></param>
+        </member>
+        <member name="P:ECommon.Components.ComponentAttribute.LifeStyle">
+            <summary>The lifetime of the component.
+            </summary>
+        </member>
+        <member name="T:ECommon.Components.LifeStyle">
+            <summary>An enum to description the lifetime of a component.
+            </summary>
+        </member>
+        <member name="F:ECommon.Components.LifeStyle.Transient">
+            <summary>Represents a component is a transient component.
+            </summary>
+        </member>
+        <member name="F:ECommon.Components.LifeStyle.Singleton">
+            <summary>Represents a component is a singleton component.
+            </summary>
+        </member>
+        <member name="T:ECommon.Components.IObjectContainer">
+            <summary>Represents an object container interface.
+            </summary>
+        </member>
+        <member name="M:ECommon.Components.IObjectContainer.RegisterType(System.Type,ECommon.Components.LifeStyle)">
+            <summary>Register a implementation type.
+            </summary>
+            <param name="implementationType">The implementation type.</param>
+            <param name="life">The life cycle of the implementer type.</param>
+        </member>
+        <member name="M:ECommon.Components.IObjectContainer.RegisterType(System.Type,System.Type,ECommon.Components.LifeStyle)">
+            <summary>Register a implementer type as a service implementation.
+            </summary>
+            <param name="serviceType">The service type.</param>
+            <param name="implementationType">The implementation type.</param>
+            <param name="life">The life cycle of the implementer type.</param>
+        </member>
+        <member name="M:ECommon.Components.IObjectContainer.Register``2(ECommon.Components.LifeStyle)">
+            <summary>Register a implementer type as a service implementation.
+            </summary>
+            <typeparam name="TService">The service type.</typeparam>
+            <typeparam name="TImplementer">The implementer type.</typeparam>
+            <param name="life">The life cycle of the implementer type.</param>
+        </member>
+        <member name="M:ECommon.Components.IObjectContainer.RegisterInstance``2(``1)">
+            <summary>Register a implementer type instance as a service implementation.
+            </summary>
+            <typeparam name="TService">The service type.</typeparam>
+            <typeparam name="TImplementer">The implementer type.</typeparam>
+            <param name="instance">The implementer type instance.</param>
+        </member>
+        <member name="M:ECommon.Components.IObjectContainer.Resolve``1">
+            <summary>Resolve a service.
+            </summary>
+            <typeparam name="TService">The service type.</typeparam>
+            <returns>The component instance that provides the service.</returns>
+        </member>
+        <member name="M:ECommon.Components.IObjectContainer.Resolve(System.Type)">
+            <summary>Resolve a service.
+            </summary>
+            <param name="serviceType">The service type.</param>
+            <returns>The component instance that provides the service.</returns>
+        </member>
+        <member name="T:ECommon.Components.ObjectContainer">
+            <summary>Represents an object container.
+            </summary>
+        </member>
+        <member name="M:ECommon.Components.ObjectContainer.SetContainer(ECommon.Components.IObjectContainer)">
+            <summary>Set the object container.
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:ECommon.Components.ObjectContainer.RegisterType(System.Type,ECommon.Components.LifeStyle)">
+            <summary>Register a implementation type.
+            </summary>
+            <param name="implementationType">The implementation type.</param>
+            <param name="life">The life cycle of the implementer type.</param>
+        </member>
+        <member name="M:ECommon.Components.ObjectContainer.RegisterType(System.Type,System.Type,ECommon.Components.LifeStyle)">
+            <summary>Register a implementer type as a service implementation.
+            </summary>
+            <param name="serviceType">The implementation type.</param>
+            <param name="implementationType">The implementation type.</param>
+            <param name="life">The life cycle of the implementer type.</param>
+        </member>
+        <member name="M:ECommon.Components.ObjectContainer.Register``2(ECommon.Components.LifeStyle)">
+            <summary>Register a implementer type as a service implementation.
+            </summary>
+            <typeparam name="TService">The service type.</typeparam>
+            <typeparam name="TImplementer">The implementer type.</typeparam>
+            <param name="life">The life cycle of the implementer type.</param>
+        </member>
+        <member name="M:ECommon.Components.ObjectContainer.RegisterInstance``2(``1)">
+            <summary>Register a implementer type instance as a service implementation.
+            </summary>
+            <typeparam name="TService">The service type.</typeparam>
+            <typeparam name="TImplementer">The implementer type.</typeparam>
+            <param name="instance">The implementer type instance.</param>
+        </member>
+        <member name="M:ECommon.Components.ObjectContainer.Resolve``1">
+            <summary>Resolve a service.
+            </summary>
+            <typeparam name="TService">The service type.</typeparam>
+            <returns>The component instance that provides the service.</returns>
+        </member>
+        <member name="M:ECommon.Components.ObjectContainer.Resolve(System.Type)">
+            <summary>Resolve a service.
+            </summary>
+            <param name="serviceType">The service type.</param>
+            <returns>The component instance that provides the service.</returns>
+        </member>
+        <member name="P:ECommon.Components.ObjectContainer.Current">
+            <summary>Represents the current object container.
+            </summary>
+        </member>
+        <member name="T:ECommon.TcpTransport.BufferManagement.BufferManager">
+            <summary>
+            A manager to handle buffers for the socket connections
+            </summary>
+            <remarks>
+            When used in an async call a buffer is pinned. Large numbers of pinned buffers
+            cause problem with the GC (in particular it causes heap fragmentation).
+            This class maintains a set of large segments and gives clients pieces of these
+            segments that they can use for their buffers. The alternative to this would be to
+            create many small arrays which it then maintained. This methodology should be slightly
+            better than the many small array methodology because in creating only a few very
+            large objects it will force these objects to be placed on the LOH. Since the
+            objects are on the LOH they are at this time not subject to compacting which would
+            require an update of all GC roots as would be the case with lots of smaller arrays
+            that were in the normal heap.
+            </remarks>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.SetDefaultBufferManager(ECommon.TcpTransport.BufferManagement.BufferManager)">
+            <summary>
+            Sets the default buffer manager.
+            </summary>
+            <param name="manager">The new default buffer manager.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructs a new <see cref="T:ECommon.TcpTransport.BufferManagement.BufferManager"></see> object
+            </summary>
+            <param name="segmentChunks">The number of chunks to create per segment</param>
+            <param name="chunkSize">The size of a chunk in bytes</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructs a new <see cref="T:ECommon.TcpTransport.BufferManagement.BufferManager"></see> object
+            </summary>
+            <param name="segmentChunks">The number of chunks to create per segment</param>
+            <param name="chunkSize">The size of a chunk in bytes</param>
+            <param name="initialSegments">The initial number of segments to create</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.#ctor(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Constructs a new <see cref="T:ECommon.TcpTransport.BufferManagement.BufferManager"></see> object
+            </summary>
+            <param name="segmentChunks">The number of chunks to create per segment</param>
+            <param name="chunkSize">The size of a chunk in bytes</param>
+            <param name="initialSegments">The initial number of segments to create</param>
+            <param name="allowedToCreateMemory">If false when empty and checkout is called an exception will be thrown</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.CreateNewSegment(System.Boolean)">
+            <summary>
+            Creates a new segment, makes buffers available
+            </summary>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckOut">
+            <summary>
+            Checks out a buffer from the manager
+            </summary>
+            <remarks>
+            It is the client's responsibility to return the buffer to the manager by
+            calling <see cref="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckIn(System.ArraySegment{System.Byte})"></see> on the buffer
+            </remarks>
+            <returns>A <see cref="T:System.ArraySegment`1"></see> that can be used as a buffer</returns>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckOut(System.Int32)">
+            <summary>
+            Checks out a buffer from the manager
+            </summary>
+            <remarks>
+            It is the client's responsibility to return the buffer to the manger by
+            calling <see cref="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckIn(System.Collections.Generic.IEnumerable{System.ArraySegment{System.Byte}})"></see> on the buffer
+            </remarks>
+            <returns>A <see cref="T:System.ArraySegment`1"></see> that can be used as a buffer</returns>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckIn(System.ArraySegment{System.Byte})">
+            <summary>
+            Returns a buffer to the control of the manager
+            </summary>
+            <remarks>
+            It is the client's responsibility to return the buffer to the manger by
+            calling <see cref="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckIn(System.ArraySegment{System.Byte})"></see> on the buffer
+            </remarks>
+            <param name="buffer">The <see cref="T:System.ArraySegment`1"></see> to return to the cache</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckIn(System.Collections.Generic.IEnumerable{System.ArraySegment{System.Byte}})">
+            <summary>
+            Returns a set of buffers to the control of the manager
+            </summary>
+            <remarks>
+            It is the client's responsibility to return the buffer to the manger by
+            calling <see cref="M:ECommon.TcpTransport.BufferManagement.BufferManager.CheckIn(System.Collections.Generic.IEnumerable{System.ArraySegment{System.Byte}})"></see> on the buffer
+            </remarks>
+            <param name="buffersToReturn">The <see cref="T:System.ArraySegment`1"></see> to return to the cache</param>
+        </member>
+        <member name="P:ECommon.TcpTransport.BufferManagement.BufferManager.Default">
+            <summary>
+            Gets the default buffer manager
+            </summary>
+            <remarks>You should only be using this method if you don't want to manage buffers on your own.</remarks>
+            <value>The default buffer manager.</value>
+        </member>
+        <member name="P:ECommon.TcpTransport.BufferManagement.BufferManager.AvailableBuffers">
+            <summary>
+            The current number of buffers available
+            </summary>
+        </member>
+        <member name="P:ECommon.TcpTransport.BufferManagement.BufferManager.TotalBufferSize">
+            <summary>
+            The total size of all buffers
+            </summary>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"/> class.
+            </summary>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.#ctor(ECommon.TcpTransport.BufferManagement.BufferManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"/> class.
+            </summary>
+            <param name="bufferManager">The buffer manager.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.#ctor(System.Int32,ECommon.TcpTransport.BufferManagement.BufferManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"/> class.
+            </summary>
+            <param name="initialBufferCount">The number of initial buffers.</param>
+            <param name="bufferManager">The buffer manager.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.Append(System.Byte[])">
+            <summary>
+            Appends the specified data.
+            </summary>
+            <param name="data">The data to write.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.Append(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Appends the specified data.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="offset">The offset.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.Write(System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes data to the specified position.
+            </summary>
+            <param name="position">The position to write at.</param>
+            <param name="data">The data.</param>
+            <param name="offset">The offset.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.Write(System.Int32,System.ArraySegment{System.Byte})">
+            <summary>
+            Writes data to the specified position.
+            </summary>
+            <param name="position">The position to write at.</param>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.ReadFrom(System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads data from a given position
+            </summary>
+            <param name="position">The position to read from.</param>
+            <param name="data">Where to read the data to.</param>
+            <param name="offset">The offset to start reading into.</param>
+            <param name="count">The number of bytes to read.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.ReadFrom(System.Int32,System.ArraySegment{System.Byte})">
+            <summary>
+            Reads data from a given position.
+            </summary>
+            <param name="position">The position to read from.</param>
+            <param name="data">Where to read the data to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.SetLength(System.Int32)">
+            <summary>
+            Sets the length of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"></see>
+            </summary>
+            <param name="newLength">The new length.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.SetLength(System.Int32,System.Boolean)">
+            <summary>
+            Sets the length of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"></see>
+            </summary>
+            <param name="newLength">The new length</param>
+            <param name="releaseMemory">if set to <c>true</c> any memory no longer used will be released.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.ToByteArray">
+            <summary>
+            Converts this <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"></see> to a byte array.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPool.Dispose">
+            <summary>
+            Returns any memory used buy this <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"></see> to the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferManager"></see>
+            </summary>
+        </member>
+        <member name="P:ECommon.TcpTransport.BufferManagement.BufferPool.Capacity">
+            <summary>
+            Gets the capacity of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"></see>
+            </summary>
+            <value>The capacity.</value>
+        </member>
+        <member name="P:ECommon.TcpTransport.BufferManagement.BufferPool.Length">
+            <summary>
+            Gets the current length of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"></see>
+            </summary>
+            <value>The length.</value>
+        </member>
+        <member name="P:ECommon.TcpTransport.BufferManagement.BufferPool.EffectiveBuffers">
+            <summary>
+            Gets the effective buffers contained in this <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPool"></see>
+            </summary>
+            <value>The effective buffers.</value>
+        </member>
+        <member name="P:ECommon.TcpTransport.BufferManagement.BufferPool.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:System.Byte"/> with the specified index.
+            </summary>
+        </member>
+        <member name="T:ECommon.TcpTransport.BufferManagement.BufferPool.Position">
+            <summary>
+            Structure to represent an index and an offset into the list of buffers allowing for quick access to a position
+            </summary>
+        </member>
+        <member name="M:ECommon.TcpTransport.BufferManagement.BufferPoolStream.#ctor(ECommon.TcpTransport.BufferManagement.BufferPool)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ECommon.TcpTransport.BufferManagement.BufferPoolStream"/> class.
+            </summary>
+            <param name="bufferPool">The buffer pool used as underlying storage.</param>
+        </member>
+        <member name="T:ECommon.TcpTransport.Framing.IMessageFramer">
+            <summary>
+            Encodes outgoing messages in frames and decodes incoming frames. 
+            For decoding it uses an internal state, raising a registered 
+            callback, once full message arrives
+            </summary>
+        </member>
+        <member name="T:ECommon.TcpTransport.Framing.LengthPrefixMessageFramer">
+            <summary>
+            Uses length-prefixed framing to encode outgoing messages and decode
+            incoming messages, using internal state and raising a callback once 
+            full message arrives.
+            </summary>
+        </member>
+        <member name="M:ECommon.TcpTransport.Framing.LengthPrefixMessageFramer.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ECommon.TcpTransport.Framing.LengthPrefixMessageFramer"/> class.
+            </summary>
+        </member>
+        <member name="M:ECommon.TcpTransport.Framing.LengthPrefixMessageFramer.Parse(System.ArraySegment{System.Byte})">
+            <summary>
+            Parses a stream chunking based on length-prefixed framing. 
+            Calls are re-entrant and hold state internally. Once full message arrives,
+            callback is raised (it is registered via <see cref="M:ECommon.TcpTransport.Framing.LengthPrefixMessageFramer.RegisterMessageArrivedCallback(System.Action{System.ArraySegment{System.Byte}})"/>
+            </summary>
+            <param name="bytes">A byte array of data to append</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.Framing.LengthPrefixMessageFramerWithBufferPool.#ctor(ECommon.TcpTransport.BufferManagement.BufferManager,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ECommon.TcpTransport.Framing.LengthPrefixMessageFramerWithBufferPool"/> class.
+            </summary>
+        </member>
+        <member name="M:ECommon.TcpTransport.Framing.LengthPrefixMessageFramerWithBufferPool.Parse(System.ArraySegment{System.Byte})">
+            <summary>
+            Parses a stream chunking based on length-prefixed framing. Calls are re-entrant and hold state internally.
+            </summary>
+            <param name="bytes">A byte array of data to append</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.Framing.StxEtxMessageFramer.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ECommon.TcpTransport.Framing.StxEtxMessageFramer"/> class.
+            </summary>
+            <param name="initialBufferSize">Initial size of the Buffer.</param>
+        </member>
+        <member name="M:ECommon.TcpTransport.Framing.StxEtxMessageFramer.Parse(System.ArraySegment{System.Byte})">
+            <summary>
+            Parses a stream chunking based on STX/ETX framing. Calls are re-entrant and hold state internally.
+            </summary>
+            <param name="bytes">A byte array of data to append</param>
+        </member>
+        <member name="T:ECommon.Utilities.DelegateFactory">
+            <summary>A dynamic delegate factory.
+            </summary>
+        </member>
+        <member name="M:ECommon.Utilities.DelegateFactory.CreateDelegate``1(System.Reflection.MethodInfo,System.Type[])">
+            <summary>Creates a delegate from the given methodInfo and parameterTypes.
+            </summary>
+            <typeparam name="D"></typeparam>
+            <param name="methodInfo"></param>
+            <param name="parameterTypes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ECommon.Utilities.LockUtility">
+            <summary>A class provide the functionality to lock object by value object.
+            </summary>
+        </member>
+        <member name="M:ECommon.Utilities.LockUtility.Lock(System.Object,System.Action)">
+            <summary>Lock an action by a given key value object.
+            </summary>
+            <param name="key"></param>
+            <param name="action"></param>
+        </member>
+        <member name="T:ECommon.Utilities.ObjectId">
+            <summary>Represents an ObjectId
+            </summary>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="bytes">The bytes.</param>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.#ctor(System.DateTime,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="timestamp">The timestamp (expressed as a DateTime).</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.#ctor(System.Int32,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.op_LessThan(ECommon.Utilities.ObjectId,ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is less than the second ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.op_LessThanOrEqual(ECommon.Utilities.ObjectId,ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is less than or equal to the second ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.op_Equality(ECommon.Utilities.ObjectId,ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are equal.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.op_Inequality(ECommon.Utilities.ObjectId,ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are not equal.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.op_GreaterThanOrEqual(ECommon.Utilities.ObjectId,ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is greather than or equal to the second ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.op_GreaterThan(ECommon.Utilities.ObjectId,ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is greather than the second ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.GenerateNewId">
+            <summary>
+            Generates a new ObjectId with a unique value.
+            </summary>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.GenerateNewId(System.DateTime)">
+            <summary>
+            Generates a new ObjectId with a unique value (with the timestamp component based on a given DateTime).
+            </summary>
+            <param name="timestamp">The timestamp component (expressed as a DateTime).</param>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.GenerateNewId(System.Int32)">
+            <summary>
+            Generates a new ObjectId with a unique value (with the given timestamp).
+            </summary>
+            <param name="timestamp">The timestamp component.</param>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.GenerateNewStringId">
+            <summary>
+            Generates a new ObjectId string with a unique value.
+            </summary>
+            <returns>The string value of the new generated ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.Pack(System.Int32,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Packs the components of an ObjectId into a byte array.
+            </summary>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+            <returns>A byte array.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.Parse(System.String)">
+            <summary>
+            Parses a string and creates a new ObjectId.
+            </summary>
+            <param name="s">The string value.</param>
+            <returns>A ObjectId.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.TryParse(System.String,ECommon.Utilities.ObjectId@)">
+            <summary>
+            Tries to parse a string and create a new ObjectId.
+            </summary>
+            <param name="s">The string value.</param>
+            <param name="objectId">The new ObjectId.</param>
+            <returns>True if the string was parsed successfully.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.Unpack(System.Byte[],System.Int32@,System.Int32@,System.Int16@,System.Int32@)">
+            <summary>
+            Unpacks a byte array into the components of an ObjectId.
+            </summary>
+            <param name="bytes">A byte array.</param>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.GetCurrentProcessId">
+            <summary>
+            Gets the current process id.  This method exists because of how CAS operates on the call stack, checking
+            for permissions before executing the method.  Hence, if we inlined this call, the calling method would not execute
+            before throwing an exception requiring the try/catch at an even higher level that we don't necessarily control.
+            </summary>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.CompareTo(ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares this ObjectId to another ObjectId.
+            </summary>
+            <param name="other">The other ObjectId.</param>
+            <returns>A 32-bit signed integer that indicates whether this ObjectId is less than, equal to, or greather than the other.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.Equals(ECommon.Utilities.ObjectId)">
+            <summary>
+            Compares this ObjectId to another ObjectId.
+            </summary>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are equal.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.Equals(System.Object)">
+            <summary>
+            Compares this ObjectId to another object.
+            </summary>
+            <param name="obj">The other object.</param>
+            <returns>True if the other object is an ObjectId and equal to this one.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.ToByteArray">
+            <summary>
+            Converts the ObjectId to a byte array.
+            </summary>
+            <returns>A byte array.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.ToString">
+            <summary>
+            Returns a string representation of the value.
+            </summary>
+            <returns>A string representation of the value.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.TryParseHexString(System.String,System.Byte[]@)">
+            <summary>
+            Tries to parse a hex string to a byte array.
+            </summary>
+            <param name="s">The hex string.</param>
+            <param name="bytes">A byte array.</param>
+            <returns>True if the hex string was successfully parsed.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.ParseHexString(System.String)">
+            <summary>
+            Parses a hex string into its equivalent byte array.
+            </summary>
+            <param name="s">The hex string to parse.</param>
+            <returns>The byte equivalent of the hex string.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.ToHexString(System.Byte[])">
+            <summary>
+            Converts a byte array to a hex string.
+            </summary>
+            <param name="bytes">The byte array.</param>
+            <returns>A hex string.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.ToMillisecondsSinceEpoch(System.DateTime)">
+            <summary>
+            Converts a DateTime to number of milliseconds since Unix epoch.
+            </summary>
+            <param name="dateTime">A DateTime.</param>
+            <returns>Number of seconds since Unix epoch.</returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectId.ToUniversalTime(System.DateTime)">
+            <summary>
+            Converts a DateTime to UTC (with special handling for MinValue and MaxValue).
+            </summary>
+            <param name="dateTime">A DateTime.</param>
+            <returns>The DateTime in UTC.</returns>
+        </member>
+        <member name="P:ECommon.Utilities.ObjectId.Empty">
+            <summary>
+            Gets an instance of ObjectId where the value is empty.
+            </summary>
+        </member>
+        <member name="P:ECommon.Utilities.ObjectId.Timestamp">
+            <summary>
+            Gets the timestamp.
+            </summary>
+        </member>
+        <member name="P:ECommon.Utilities.ObjectId.Machine">
+            <summary>
+            Gets the machine.
+            </summary>
+        </member>
+        <member name="P:ECommon.Utilities.ObjectId.Pid">
+            <summary>
+            Gets the PID.
+            </summary>
+        </member>
+        <member name="P:ECommon.Utilities.ObjectId.Increment">
+            <summary>
+            Gets the increment.
+            </summary>
+        </member>
+        <member name="P:ECommon.Utilities.ObjectId.CreationTime">
+            <summary>
+            Gets the creation time (derived from the timestamp).
+            </summary>
+        </member>
+        <member name="T:ECommon.Scheduling.Worker">
+            <summary>Represent a background worker that will repeatedly execute a specific method.
+            </summary>
+        </member>
+        <member name="M:ECommon.Scheduling.Worker.#ctor(System.String,System.Action)">
+            <summary>Initialize a new worker with the specified action.
+            </summary>
+            <param name="actionName">The action name.</param>
+            <param name="action">The action to run by the worker.</param>
+        </member>
+        <member name="M:ECommon.Scheduling.Worker.Start">
+            <summary>Start the worker if it is not running.
+            </summary>
+        </member>
+        <member name="M:ECommon.Scheduling.Worker.Stop">
+            <summary>Request to stop the worker.
+            </summary>
+        </member>
+        <member name="P:ECommon.Scheduling.Worker.ActionName">
+            <summary>Returns the action name of the current worker.
+            </summary>
+        </member>
+        <member name="T:ECommon.Extensions.ReaderWriterLockSlimExtensions">
+            <summary>An extension class to provide utility lock mechanism.
+            </summary>
+        </member>
+        <member name="M:ECommon.Extensions.ReaderWriterLockSlimExtensions.AtomRead(System.Threading.ReaderWriterLockSlim,System.Action)">
+            <summary>An atom read action wrapper.
+            </summary>
+            <param name="readerWriterLockSlim"></param>
+            <param name="action"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:ECommon.Extensions.ReaderWriterLockSlimExtensions.AtomRead``1(System.Threading.ReaderWriterLockSlim,System.Func{``0})">
+            <summary>An atom read func wrapper.
+            </summary>
+            <param name="readerWriterLockSlim"></param>
+            <param name="function"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:ECommon.Extensions.ReaderWriterLockSlimExtensions.AtomWrite(System.Threading.ReaderWriterLockSlim,System.Action)">
+            <summary>An atom write action wrapper.
+            </summary>
+            <param name="readerWriterLockSlim"></param>
+            <param name="action"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:ECommon.Extensions.ReaderWriterLockSlimExtensions.AtomWrite``1(System.Threading.ReaderWriterLockSlim,System.Func{``0})">
+            <summary>An atom write func wrapper.
+            </summary>
+            <param name="readerWriterLockSlim"></param>
+            <param name="function"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:ECommon.Utilities.TypeUtils">
+            <summary>A class provides utility methods.
+            </summary>
+        </member>
+        <member name="M:ECommon.Utilities.TypeUtils.ConvertType``1(System.Object)">
+            <summary>Convert the given object to a given strong type.
+            </summary>
+        </member>
+        <member name="T:ECommon.Utilities.ObjectUtils">
+            <summary>A class provides utility methods.
+            </summary>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectUtils.CreateObject``1(System.Object)">
+            <summary>Create an object from the source object, assign the properties by the same name.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ECommon.Utilities.ObjectUtils.UpdateObject``2(``0,``1,System.Linq.Expressions.Expression{System.Func{``1,System.Object}}[])">
+            <summary>Update the target object by the source object, assign the properties by the same name.
+            </summary>
+            <typeparam name="TTarget"></typeparam>
+            <typeparam name="TSource"></typeparam>
+            <param name="target"></param>
+            <param name="source"></param>
+            <param name="propertyExpressionsFromSource"></param>
+        </member>
+    </members>
+</doc>

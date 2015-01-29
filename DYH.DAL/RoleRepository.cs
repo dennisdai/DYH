@@ -19,7 +19,7 @@ namespace DYH.DAL
 
         public IEnumerable<RoleEntry> GetList()
         {
-            return _provider.Database.Query<RoleEntry>("");
+            return _provider.Database.Query<RoleEntry>("").ToList();
         }
 
         public RoleEntry GetById(int id)

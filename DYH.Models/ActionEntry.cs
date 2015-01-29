@@ -26,7 +26,7 @@ namespace DYH.Models
         public string DisplayName { get; set; }
         [DisplayName("Sequence")]
         [Required]
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Please enter a valid number.")]
+        //[RegularExpression(@"^[0-9]+$", ErrorMessage = "Please enter a valid number.")]
         [Column("seqno")]
         public int SeqNo { get; set; }
         [DisplayName("Description")]
